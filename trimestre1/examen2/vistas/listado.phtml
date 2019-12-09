@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Listado Reparaciones</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Cabecera</h1>
+        <form method="GET" action="?controller=borrarportermino">
+            <div class="form-group">
+                <input type="hidden" name="controller" value="borrarportermino">
+                <input type="name" class="form-control" name="busqueda" placeholder="Término a borrar">
+                <button type="submit" class="btn btn-primary">Borrar</button>
+            </div>
+        </form>
+        <table class="table">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Horas</th>
+                <th scope="col">Comentario</th>
+            </tr>
+            <?php
+            foreach ($reparaciones as $reparacion) {
+                ?>
+                <tr>
+                    <td><?= $reparacion->id ?></td>
+                    <td><?= $reparacion->descripcion ?></td>
+                    <td><?= $reparacion->horas ?></td>
+                    <td><?= $reparacion->comentario ?></td>
+                    <td><a href="?controller=aumentar&id=<?= $reparacion->id ?>">+</a></td>
+                </tr>
+            <?php
+            }
+
+            ?>
+        </table>
+        <div class="alert alert-primary" role="alert">
+            Horas totales: <?= $totalHoras ?>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ejercicio 3</title>
+    <meta charset="UTF-8">
+    <style>
+        .error {color:red;}
+        .bajo {color:red;}
+        .medio {color:blue;}
+        .alto {color:green;}
+    </style>
+  </head>
+  <body>
+        <form action="index.php" method="POST">
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" value="<?=$nombre?>" id="nombre">
+            <span class="error"><?=$errorNombre?></span>
+            <br>
+            <label for="distancia">Distancia en Km</label>
+            <input type="number" min="1" name="distancia" value="<?=$distanciaKm?>" id="distancia">
+            <br>
+            <label for="tiempo">Tiempo en min</label>
+            <input type="number" min="1" name="tiempo" value="<?=$tiempoMin?>" id="tiempo">
+            <br>
+            <label for="Tipo">Tipo de entrenamiento</label>
+            <select name="tipo" id="tipo">
+                <option value="carrera" <?=$tipo=="carrera"?"selected":""?>>Carrera</option>
+                <option value="bicicleta" <?=$tipo=="bicicleta"?"selected":""?>>Bici</option>
+            </select>
+            <br>
+            <button type="submit">Calcular!</button>
+        </form>
+   </body>
+</html>

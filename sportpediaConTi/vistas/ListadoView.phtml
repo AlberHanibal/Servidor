@@ -1,0 +1,28 @@
+<?php require_once "Ti.php"; ?>
+<?php Ti::extend("MainView.phtml"); ?>
+
+<?php Ti::startBlock("content"); ?>
+<div class="row row-cols-1 row-cols-md-2">
+    <?php
+    foreach ($data["deportistas"] as $deportista) {
+        ?>
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="assets/fotos/<?= $deportista->img ?>" class="card-img" alt="<?= $deportista->nombre ?>">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title"><?= $deportista->nombre ?></h5>
+                        <p class="card-text"><?= isset($deportista->nombre_local) ? " ($deportista->nombre_local) " : "$deportista->nombre" ?> tiene <?= $deportista->getEdad() ?> años. Compite en <?= $data["deportes"][$deportista->id_deporte]->nombre ?>.</p>
+                        <p class="card-text"><small class="text-muted"><a href="index.php?controller=informacion&id=<?= $deportista->id ?>">Para más información</a></small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php
+    }
+    ?>
+</div>
+<?php Ti::endBlock(); ?>
+<?php Ti::endExtend() ?>
