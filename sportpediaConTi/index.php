@@ -13,6 +13,9 @@ try {
         case "informacion":
             (new DeportistaController)->informacion();
             break;
+        case "nuevoDeportista":
+            (new DeportistaController)->annadirDeportista();
+            break;
         default:
             die ("El controlador solicitado no existe");
     }

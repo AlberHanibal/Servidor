@@ -17,18 +17,28 @@ class OrmSportpedia
         $conn->query("SET NAMES 'utf8'"); 
         return $conn;
     }
-    
-    public function obtenerTodosDeportistas($id_deporte = null){
+
+    public function obtenerTodosDeportistas($id_deporte, $limite, $pagActual)
+    {
         $conn = $this->obtenerConexion();
-        $sql = "SELECT id, nombre, nombre_local, img, anno_nacimiento, bio, youtube, id_deporte FROM deportistas";
-        $stmt = $conn->prepare($sql);
+        $pagActual = ($pagActual - 1) * $limite;
+        if ($id_deporte == "") {
+            $sql = "SELECT id, nombre, nombre_local, img, anno_nacimiento, bio, youtube, id_deporte FROM deportistas LIMIT ? OFFSET ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ii", $limite, $pagActual);
+        } else {
+            $sql = "SELECT id, nombre, nombre_local, img, anno_nacimiento, bio, youtube, id_deporte FROM deportistas WHERE id_deporte = ? LIMIT ? OFFSET ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("iii", $id_deporte, $limite, $pagActual);
+        }
+        
         // Añade un filtrado por id_deporte.
         // Si pasan un parámetro, añade un WHERE a la cadena y haz el bind a $id_deporte.
         $stmt->execute();
-        $result=$stmt->get_result();
+        $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             $deportistas = [];
-            while($row = $result->fetch_object("Deportista")) {
+            while ($row = $result->fetch_object("Deportista")) {
                 $deportistas[$row->id] = $row;  // Array asociativo. La clave es el id del deportista
             }
         }
@@ -79,6 +89,22 @@ class OrmSportpedia
         }
         $conn->close();
         return $deporte;
+    }
+
+    public function obtenerCantidadDeportistas($id_deporte) {
+        $conn = $this->obtenerConexion();
+        if ($id_deporte == "") {
+            $sql = "SELECT COUNT(*) as cantidad FROM deportistas";
+            $stmt = $conn->prepare($sql);
+        } else {
+            $sql = "SELECT COUNT(*) as cantidad FROM deportistas WHERE id_deporte = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("i", $id_deporte);
+        }
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        return $row["cantidad"];
     }
 
 }
