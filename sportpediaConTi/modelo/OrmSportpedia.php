@@ -31,9 +31,6 @@ class OrmSportpedia
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("iii", $id_deporte, $limite, $pagActual);
         }
-        
-        // Añade un filtrado por id_deporte.
-        // Si pasan un parámetro, añade un WHERE a la cadena y haz el bind a $id_deporte.
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
@@ -105,6 +102,12 @@ class OrmSportpedia
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
         return $row["cantidad"];
+    }
+
+    public function insertarDeportista($nombre, $img, $anno_nac, $bio, $id_deporte, $nombre_local, $youtube) {
+        $conn = $this->obtenerConexion();
+        // mirar el nombre_local y youtube
+        $sql = "SELECT INTO deportistas  VALUES";
     }
 
 }

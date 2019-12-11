@@ -1,8 +1,10 @@
 <?php require_once "Ti.php"; ?>
 <?php Ti::extend("MainView.phtml"); ?>
 
-<?php Ti::startBlock("content"); ?>
-<form >
+<?php Ti::startBlock("content"); 
+extract($data);
+?>
+<form>
     <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input type="text" class="form-control" name="nombre">

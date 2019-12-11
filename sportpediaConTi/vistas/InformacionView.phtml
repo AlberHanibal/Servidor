@@ -1,9 +1,8 @@
 <?php require_once "Ti.php"; ?>
 <?php Ti::extend("MainView.phtml"); ?>
 
-<?php Ti::startBlock("content"); 
-$deportista = $data["deportista"];
-$deporte = $data["deporte"];
+<?php Ti::startBlock("content");
+extract($data);
 ?>
 <div class="container">
     <div class="row mt-1 mb-1">
@@ -17,13 +16,9 @@ $deporte = $data["deporte"];
         </div>
     </div>
     <div class="row mb-1">
-        <?php
-        if (isset($deportista->youtube)) {
-            ?>
+        <?php if (isset($deportista->youtube)) : ?>
             <iframe width="560" height="315" src="https://www.youtube.com/embed/<?= $deportista->youtube ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <?php
-        }
-        ?>
+        <?php endif ?>
     </div>
 
 </div>
