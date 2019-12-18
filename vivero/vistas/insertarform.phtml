@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Insertar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h3 class="mb-1 display-3">Plantas</h3>
+        <form action="?controller=insertar" method="POST">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" value="<?= $planta->nombre ?>">
+                <small class="form-text text-danger"><?= $errorNombre ?></small>
+            </div>
+            <div class="form-group">
+                <label for="precio">Precio</label>
+                <input type="number" class="form-control" id="precio" name="precio" min="0" value="<?= $planta->precio ?>">
+            </div>
+            <div>Ambiente</div><br>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="interior" name="ambiente" class="custom-control-input" value="I" <?php if ($planta->ambiente == "I") echo "checked"; ?>>
+                <label class="custom-control-label" for="interior">Interior</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="exterior" name="ambiente" class="custom-control-input" value="E" <?php if ($planta->ambiente == "E") echo "checked"; ?>>
+                <label class="custom-control-label" for="exterior">Exterior</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="mixto" name="ambiente" class="custom-control-input" value="M" <?php if ($planta->ambiente == "M") echo "checked"; ?>>
+                <label class="custom-control-label" for="mixto">Mixto</label>
+            </div><br><br>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+            <a href="?controller=listar" class="btn btn-secondary" role="button">Volver</a>
+        </form>
+    </div>
+</body>
+
+</html>
