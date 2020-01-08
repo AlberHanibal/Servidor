@@ -1,0 +1,17 @@
+<?php require_once "Ti.php"; ?>
+<?php Ti::extend("MainView.phtml"); ?>
+
+<?php Ti::startBlock("content"); 
+extract($data);
+?>
+<form>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="text" class="form-control" name="nombre">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <button type="submit" class="btn btn-primary">Añadir</button>
+</form>
+
+<?php Ti::endBlock(); ?>
+<?php Ti::endExtend(); ?>
