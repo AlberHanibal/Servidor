@@ -1,5 +1,1 @@
-orm con klasto
-    insertar usuario
-    sacar 1 usuario
-    listado post
-vista listado
+el join de la categoria de post

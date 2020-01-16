@@ -5,8 +5,21 @@ use \dawfony\Ti;
 extract($data);
 Ti::extend("view/MainView.phtml"); ?>
 
-<?php Ti::startBlock("content");?>
+<?php Ti::startBlock("content"); ?>
 <h1>Estoy en listado</h1>
+<?php foreach ($posts as $post) : ?>
+    <div class="row">
+        <div class="col-md-3">
+            <?= $post->foto ?>foto
+        </div>
+        <div class="col-md-7">
+            <?= $post->resumen ?>resumen
+        </div>
+        <div class="col-md-2">
+            <?= $post->usuario_login ?> en <?= $post->categoria_post_id ?> a <?= $post->fecha ?>.
+        </div>
+    </div>
+<?php endforeach ?>
 
 <?php Ti::endBlock(); ?>
 <?php Ti::endExtend() ?>
