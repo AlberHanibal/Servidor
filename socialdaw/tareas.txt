@@ -1,0 +1,5 @@
+orm con klasto
+    insertar usuario
+    sacar 1 usuario
+    listado post
+vista listado

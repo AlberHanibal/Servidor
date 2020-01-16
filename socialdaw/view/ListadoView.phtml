@@ -1,0 +1,12 @@
+<?php
+
+use \dawfony\Ti;
+
+extract($data);
+Ti::extend("view/MainView.phtml"); ?>
+
+<?php Ti::startBlock("content");?>
+<h1>Estoy en listado</h1>
+
+<?php Ti::endBlock(); ?>
+<?php Ti::endExtend() ?>
