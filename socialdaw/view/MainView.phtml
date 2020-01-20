@@ -3,10 +3,8 @@
 use \dawfony\Ti;
 
 extract($data);
-global $_SESSION;
 global $URL_PATH;
-var_dump(isset($_SESSION["login"]));
-
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="es">
