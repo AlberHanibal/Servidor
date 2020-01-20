@@ -1,1 +1,4 @@
-el join de la categoria de post
+paginación
+botón de añadir post
+en post: likes y comentarios
+session

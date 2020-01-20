@@ -1,0 +1,6 @@
+INSERT INTO `post` (`id`, `fecha`, `resumen`, `texto`, `foto`, `categoria_post_id`, `usuario_login`) VALUES
+(1, '2020-01-20 11:00:00', 'Este verano pasado me vi por segunda vez la serie Digimon Adventure Tri y me gustaría contaros de qué va.', 'Las películas se desarrollan tres años después de los acontecimientos de Digimon Adventure 02 y se centra en los ocho \"niños elegidos\" originales y sus compañeros digimon. Una misteriosa anomalía ha infectado el mundo Digimon haciendo que estos se vuelvan hostiles y creando distorsiones en el mundo humano. Esto lleva a los niños elegidos a luchar contra los digimon infectados mientras hacen frente a sus responsabilidades y problemas de adolescentes, a ellos se les une otro niño elegido, Meiko Mochizuki y su compañera Meicoomon. ', 'DigimonAdventureTri.jpg', 0, 'AlberHanibal');
+
+INSERT INTO `usuario` (`login`, `password`, `rol_id`, `nombre`, `email`) VALUES
+('admin', '$2y$10$cCQL4XycIvYGfSUrjFuClexW9cfgVSBpb3V9uXDjunOvj.DBjewCa', 1, 'Alberto Colmenar', 'albercc@admin.com'),
+('AlberHanibal', '$2y$10$t1t0RL7uzgUdZRNgx/Zzp.plidkw8uQwQ5VdZGrHdfcgWyvKNZQzG', 0, 'Alberto', 'alberhanibal@asd.com');

@@ -10,14 +10,12 @@ class RedSocialController extends Controller
     function listado() {
         $title = "Listado";
         $posts = (new OrmRedSocial)->obtenerTodosLosPost();
-        global $URL_PATH;
-        echo Ti::render("view/ListadoView.phtml", compact('title', 'URL_PATH', 'posts'));
+        echo Ti::render("view/ListadoView.phtml", compact('title', 'posts'));
     }
 
     function registro() {
         $title = "Registro";
-        global $URL_PATH;
-        echo Ti::render("view/RegistroView.phtml", compact('title', 'URL_PATH'));
+        echo Ti::render("view/RegistroView.phtml", compact('title'));
     }
 
     function recibirRegistro() {
@@ -39,8 +37,7 @@ class RedSocialController extends Controller
         $errorLogin = "";
         $errorPassword = "";
         $title = "Login";
-        global $URL_PATH;
-        echo Ti::render("view/LoginView.phtml", compact('title', 'URL_PATH', 'login', 'errorLogin', 'errorPassword'));
+        echo Ti::render("view/LoginView.phtml", compact('title', 'login', 'errorLogin', 'errorPassword'));
     }
 
     function recibirLogin() {
@@ -64,13 +61,11 @@ class RedSocialController extends Controller
             session_start();
             $_SESSION["login"] = $usuario->login;
             $_SESSION["rol"] = $usuario->rol_id;
-            var_dump($_SESSION);
             global $URL_PATH;
             header("Location: $URL_PATH/");
         } else {
-            global $URL_PATH;
             $title = "Login";
-            echo Ti::render("view/LoginView.phtml", compact('title', 'URL_PATH', 'login', 'errorLogin', 'errorPassword'));
+            echo Ti::render("view/LoginView.phtml", compact('title', 'login', 'errorLogin', 'errorPassword'));
         }
         
     }

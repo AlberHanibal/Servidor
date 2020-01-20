@@ -18,8 +18,7 @@ class OrmRedSocial {
 
     function obtenerTodosLosPost() {
         $bd = Klasto::getInstance();
-        // $sql = "SELECT id, fecha, resumen, texto, foto, categoria_post_id, usuario_login, descripcion FROM post JOIN categoria_post ON categoria_post_id = id";
-        $sql = "SELECT id, fecha, resumen, texto, foto, categoria_post_id, usuario_login FROM post";
-        return $bd->query($sql, [], 'model\Post');
+        $sql = "SELECT post.id, fecha, resumen, texto, foto, categoria_post_id, usuario_login, descripcion FROM post LEFT JOIN categoria_post ON post.categoria_post_id = categoria_post.id";
+        return $bd->query($sql, [], "model\Post");;
     }
 }

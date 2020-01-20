@@ -3,20 +3,21 @@
 use \dawfony\Ti;
 
 extract($data);
+global $URL_PATH;
 Ti::extend("view/MainView.phtml"); ?>
 
 <?php Ti::startBlock("content"); ?>
-<h1>Estoy en listado</h1>
 <?php foreach ($posts as $post) : ?>
-    <div class="row">
+    <div class="row mt-4">
         <div class="col-md-3">
-            <?= $post->foto ?>foto
+            <img src="assets/photos/<?= $post->foto ?>" alt="<?= $post->foto ?>" class="img-fluid">
         </div>
         <div class="col-md-7">
-            <?= $post->resumen ?>resumen
+            <?= $post->resumen ?><br>
+            <a class="btn btn-info" href="#" role="button">Ver más</a>
         </div>
         <div class="col-md-2">
-            <?= $post->usuario_login ?> en <?= $post->categoria_post_id ?> a <?= $post->fecha ?>.
+            <?= $post->usuario_login ?> en <?= $post->descripcion ?> a <?= $post->fecha ?>.
         </div>
     </div>
 <?php endforeach ?>

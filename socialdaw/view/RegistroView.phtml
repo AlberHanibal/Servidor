@@ -3,10 +3,11 @@
 use \dawfony\Ti;
 
 extract($data);
+global $URL_PATH;
 Ti::extend("view/MainView.phtml"); ?>
 
 <?php Ti::startBlock("content"); ?>
-<form class="col-md-8 mx-auto mt-5" method="POST" action="<?= $data["URL_PATH"] ?>/registro">
+<form class="col-md-8 mx-auto mt-5" method="POST" action="<?= $URL_PATH?>/registro">
     <div class="form-group row">
         <label for="login" class="col-sm-2 col-form-label">Login</label>
         <div class="col-sm-10">
