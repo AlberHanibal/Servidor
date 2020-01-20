@@ -19,6 +19,12 @@ class OrmRedSocial {
     function obtenerTodosLosPost() {
         $bd = Klasto::getInstance();
         $sql = "SELECT post.id, fecha, resumen, texto, foto, categoria_post_id, usuario_login, descripcion FROM post LEFT JOIN categoria_post ON post.categoria_post_id = categoria_post.id";
-        return $bd->query($sql, [], "model\Post");;
+        return $bd->query($sql, [], "model\Post");
+    }
+
+    function obtenerUnPost($id) {
+        $bd = Klasto::getInstance();
+        $sql = "SELECT post.id, fecha, resumen, texto, foto, categoria_post_id, usuario_login, descripcion FROM post LEFT JOIN categoria_post ON post.categoria_post_id = categoria_post.id AND post.categoria_post_id = ?";
+        return $bd->queryOne($sql, [$id], "model\Post");
     }
 }
