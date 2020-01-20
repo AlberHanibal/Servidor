@@ -45,12 +45,15 @@ session_start();
                         <li class="nav-item">
                             <a class="nav-link" href="<?= $URL_PATH ?>/perfil">Tu perfil</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-danger" href="<?= $URL_PATH ?>/cerrarsesion">Cerrar Sesión</a>
+                        </li>
                     <?php else : ?>
                         <li class="nav-item">
                             <a class="nav-link" href="<?= $URL_PATH ?>/registro">Registrarse</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= $URL_PATH?>/login">Login</a>
+                            <a class="nav-link" href="<?= $URL_PATH ?>/login">Login</a>
                         </li>
                     <?php endif ?>
 

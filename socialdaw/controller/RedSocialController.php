@@ -69,4 +69,10 @@ class RedSocialController extends Controller
         }
         
     }
+    function cerrarSesion() {
+        session_start();
+        session_destroy();
+        global $URL_PATH;
+        header("Location: $URL_PATH/");
+    }
 }
