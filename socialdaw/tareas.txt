@@ -1,4 +1,6 @@
 paginación
-botón de añadir post
+botón de añadir post, falta funcionalidad
 en post: likes y comentarios
-session
+quitar comprobación en el login (poner 1 solo)
+no sale la imagen en /post
+completar PostView.phtml

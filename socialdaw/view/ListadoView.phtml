@@ -14,7 +14,7 @@ Ti::extend("view/MainView.phtml"); ?>
         </div>
         <div class="col-md-7">
             <?= $post->resumen ?><br>
-            <a class="btn btn-info" href="#" role="button">Ver más</a>
+            <a class="btn btn-info" href=" <?= $URL_PATH ?>/post/<?=$post->id?>" role="button">Ver más</a>
         </div>
         <div class="col-md-2">
             <?= $post->usuario_login ?> en <?= $post->descripcion ?> a <?= $post->fecha ?>.
