@@ -3,10 +3,8 @@
 use \dawfony\Ti;
 
 extract($data);
-global $_SESSION;
 global $URL_PATH;
-var_dump(isset($_SESSION["login"]));
-
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -47,12 +45,15 @@ var_dump(isset($_SESSION["login"]));
                         <li class="nav-item">
                             <a class="nav-link" href="<?= $URL_PATH ?>/perfil">Tu perfil</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-danger" href="<?= $URL_PATH ?>/cerrarsesion">Cerrar Sesión</a>
+                        </li>
                     <?php else : ?>
                         <li class="nav-item">
                             <a class="nav-link" href="<?= $URL_PATH ?>/registro">Registrarse</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= $URL_PATH?>/login">Login</a>
+                            <a class="nav-link" href="<?= $URL_PATH ?>/login">Login</a>
                         </li>
                     <?php endif ?>
 
@@ -65,6 +66,7 @@ var_dump(isset($_SESSION["login"]));
         </nav>
         <?php Ti::startBlock("content"); ?>
         <?php Ti::endBlock() ?>
+        <a href="<?= $URL_PATH ?>/publicarPost" class="btn btn-primary float-right font-weight-bold">+</a>
     </div>
 </body>
 

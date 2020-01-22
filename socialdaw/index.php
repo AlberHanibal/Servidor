@@ -49,4 +49,9 @@ Macaw::post($URL_PATH . '/registro', "controller\RedSocialController@recibirRegi
 Macaw::get($URL_PATH . '/login', "controller\RedSocialController@login");
 Macaw::post($URL_PATH . '/login', "controller\RedSocialController@recibirLogin");
 
+Macaw::get($URL_PATH . '/cerrarsesion', "controller\RedSocialController@cerrarSesion");
+
+Macaw::get($URL_PATH . '/publicarPost', "controller\RedSocialController@publicarPost");
+
+Macaw::get($URL_PATH . '/post/(:any)', "controller\RedSocialController@post");
 Macaw::dispatch();

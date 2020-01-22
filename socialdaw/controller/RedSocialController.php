@@ -10,6 +10,7 @@ class RedSocialController extends Controller
     function listado() {
         $title = "Listado";
         $posts = (new OrmRedSocial)->obtenerTodosLosPost();
+        // $posts = (new OrmRedSocial)->obtenerUnPost(1);
         echo Ti::render("view/ListadoView.phtml", compact('title', 'posts'));
     }
 
@@ -68,5 +69,22 @@ class RedSocialController extends Controller
             echo Ti::render("view/LoginView.phtml", compact('title', 'login', 'errorLogin', 'errorPassword'));
         }
         
+    }
+
+    function cerrarSesion() {
+        session_start();
+        session_destroy();
+        global $URL_PATH;
+        header("Location: $URL_PATH/");
+    }
+
+    function publicarPost() {
+
+    }
+
+    function post($id) {
+        $title = "Post";
+        $post = (new OrmRedSocial)->obtenerUnPost($id);
+        echo Ti::render("view/PostView.phtml", compact('title', 'post'));
     }
 }
