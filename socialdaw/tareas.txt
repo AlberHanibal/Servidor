@@ -2,5 +2,6 @@ paginación
 botón de añadir post, falta funcionalidad
 en post: likes y comentarios
 quitar comprobación en el login (poner 1 solo)
-no sale la imagen en /post
-completar PostView.phtml
+completar PostView.phtml, comentarios
+hacer pruebas con más seguiendo en siguiendo
+siguiendo tiene que mostrar los post de los que sigues

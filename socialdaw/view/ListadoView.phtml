@@ -10,11 +10,11 @@ Ti::extend("view/MainView.phtml"); ?>
 <?php foreach ($posts as $post) : ?>
     <div class="row mt-4">
         <div class="col-md-3">
-            <img src="assets/photos/<?= $post->foto ?>" alt="<?= $post->foto ?>" class="img-fluid">
+            <img src="<?= $URL_PATH ?>/assets/photos/<?= $post->foto ?>" alt="<?= $post->foto ?>" class="img-fluid">
         </div>
         <div class="col-md-7">
             <?= $post->resumen ?><br>
-            <a class="btn btn-info" href=" <?= $URL_PATH ?>/post/<?=$post->id?>" role="button">Ver más</a>
+            <a class="btn btn-info" href=" <?= $URL_PATH ?>/post/<?= $post->id ?>" role="button">Ver más</a>
         </div>
         <div class="col-md-2">
             <?= $post->usuario_login ?> en <?= $post->descripcion ?> a <?= $post->fecha ?>.

@@ -4,7 +4,6 @@ use \dawfony\Ti;
 
 extract($data);
 global $URL_PATH;
-session_start();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -40,13 +39,13 @@ session_start();
                 <ul class="navbar-nav mr-auto">
                     <?php if (isset($_SESSION["login"])) : ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= $URL_PATH ?>/siguendo">Siguiendo</a>
+                            <a class="nav-link" href="<?= $URL_PATH ?>/siguiendo">Siguiendo</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?= $URL_PATH ?>/perfil">Tu perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-outline-danger" href="<?= $URL_PATH ?>/cerrarsesion">Cerrar Sesión</a>
+                            <a class="btn btn-outline-danger" href="<?= $URL_PATH ?>/cerrarSesion">Cerrar Sesión</a>
                         </li>
                     <?php else : ?>
                         <li class="nav-item">
@@ -66,7 +65,9 @@ session_start();
         </nav>
         <?php Ti::startBlock("content"); ?>
         <?php Ti::endBlock() ?>
-        <a href="<?= $URL_PATH ?>/publicarPost" class="btn btn-primary float-right font-weight-bold">+</a>
+        <?php if (isset($_SESSION["login"])) : ?>
+            <a href="<?= $URL_PATH ?>/publicarPost" class="btn btn-primary float-right font-weight-bold">+</a>
+        <?php endif ?>
     </div>
 </body>
 

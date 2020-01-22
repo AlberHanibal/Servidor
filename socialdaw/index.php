@@ -40,7 +40,7 @@ Macaw::error(function() {
     recibir registro -> (con el macaw post) /registro
     hacer login y recibir login igual en /login
 */
-
+session_start();
 Macaw::get($URL_PATH . '/', "controller\RedSocialController@listado");
 
 Macaw::get($URL_PATH . '/registro', "controller\RedSocialController@registro");
@@ -49,9 +49,16 @@ Macaw::post($URL_PATH . '/registro', "controller\RedSocialController@recibirRegi
 Macaw::get($URL_PATH . '/login', "controller\RedSocialController@login");
 Macaw::post($URL_PATH . '/login', "controller\RedSocialController@recibirLogin");
 
-Macaw::get($URL_PATH . '/cerrarsesion', "controller\RedSocialController@cerrarSesion");
+Macaw::get($URL_PATH . '/cerrarSesion', "controller\RedSocialController@cerrarSesion");
 
 Macaw::get($URL_PATH . '/publicarPost', "controller\RedSocialController@publicarPost");
 
 Macaw::get($URL_PATH . '/post/(:any)', "controller\RedSocialController@post");
+
+Macaw::get($URL_PATH . '/seguir/(:any)/(:any)', "controller\RedSocialController@seguir");
+
+Macaw::get($URL_PATH . '/dejarSeguir/(:any)/(:any)', "controller\RedSocialController@dejarSeguir");
+
+Macaw::get($URL_PATH . '/siguiendo', "controller\RedSocialController@mostrarSiguiendo");
+// aqui para pillar excepciones
 Macaw::dispatch();
