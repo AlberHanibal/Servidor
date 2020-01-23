@@ -14,7 +14,11 @@ Ti::extend("view/MainView.phtml"); ?>
         </div>
         <div class="col-md-7">
             <?= $post->resumen ?><br>
-            <a class="btn btn-info" href=" <?= $URL_PATH ?>/post/<?= $post->id ?>" role="button">Ver más</a>
+            <div class="row">
+                <!-- falta escoger tamaño para el boton y luego añadir div con otro tamaño para el like y comentario, mirar código -->
+                <a class="btn btn-info" href=" <?= $URL_PATH ?>/post/<?= $post->id ?>" role="button">Ver más</a>
+            </div>
+
         </div>
         <div class="col-md-2">
             <?= $post->usuario_login ?> en <?= $post->descripcion ?> a <?= $post->fecha ?>.

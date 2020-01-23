@@ -1,6 +1,6 @@
 paginación
 botón de añadir post, falta funcionalidad
-en post: likes y comentarios
+en post: likes y comentarios. Tenemos esqueleto, falta ORM
 quitar comprobación en el login (poner 1 solo)
 completar PostView.phtml, comentarios
 hacer pruebas con más seguiendo en siguiendo

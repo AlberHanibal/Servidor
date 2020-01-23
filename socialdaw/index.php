@@ -60,5 +60,7 @@ Macaw::get($URL_PATH . '/seguir/(:any)/(:any)', "controller\RedSocialController@
 Macaw::get($URL_PATH . '/dejarSeguir/(:any)/(:any)', "controller\RedSocialController@dejarSeguir");
 
 Macaw::get($URL_PATH . '/siguiendo', "controller\RedSocialController@mostrarSiguiendo");
+
+Macaw::get($URL_PATH . '/api/like/(:num)', "controller\ApiController@likeClicked");
 // aqui para pillar excepciones
 Macaw::dispatch();
