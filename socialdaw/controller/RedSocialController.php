@@ -83,8 +83,32 @@ class RedSocialController extends Controller
     }
 
     function post($id) {
+        $esSeguidor = false;
         $title = "Post";
         $post = (new OrmRedSocial)->obtenerUnPost($id);
-        echo Ti::render("view/PostView.phtml", compact('title', 'post'));
+        if (isset($_SESSION["login"])) {
+            $esSeguidor = (new OrmRedSocial)->esSeguidor($post->usuario_login, $_SESSION["login"]);
+        }
+        $seguidores = (new OrmRedSocial)->seguidores($post->usuario_login);
+        $siguiendo = (new OrmRedSocial)->siguiendo($post->usuario_login);
+        echo Ti::render("view/PostView.phtml", compact('title', 'post', 'esSeguidor', 'seguidores', 'siguiendo'));
+    }
+
+    function seguir($seguido, $id_post) {
+        (new OrmRedSocial)->nuevoSeguidor($_SESSION["login"], $seguido);
+        global $URL_PATH;
+        header("Location: $URL_PATH/post/$id_post");
+    }
+
+    function dejarSeguir($seguido, $id_post) {
+        (new OrmRedSocial)->dejarDeSeguir($_SESSION["login"], $seguido);
+        global $URL_PATH;
+        header("Location: $URL_PATH/post/$id_post");
+    }
+
+    function mostrarSiguiendo() {
+        $title = "Siguiendo";
+        $siguiendo = (new OrmRedSocial)->todosSiguiendo(($_SESSION["login"]));
+        echo Ti::render("view/SiguiendoView.phtml", compact('title', 'siguiendo'));
     }
 }

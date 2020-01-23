@@ -7,21 +7,28 @@ global $URL_PATH;
 Ti::extend("view/MainView.phtml"); ?>
 
 <?php Ti::startBlock("content"); ?>
-<div class="row">
+<div class="row mt-2 mr-3 ml-3">
     <h3><?= $post->resumen ?></h3>
 </div>
 <div class="row">
     <div class="col-md-2">
-        <img src="assets/photos/<?= $post->foto ?>" alt="<?= $post->foto ?>" class="img-fluid">
+        <img src="<?= $URL_PATH ?>/assets/photos/<?= $post->foto ?>" alt="<?= $post->foto ?>" class="img-fluid">
     </div>
-    <div class="col-md-8">
+    <div class="col-md-7">
         <?= $post->texto ?>
     </div>
     <div class="col-md-1">
         <?= $post->usuario_login ?> en <?= $post->descripcion ?> a <?= $post->fecha ?>.
     </div>
-    <div class="col-md-1">
-
+    <div class="col-md-2">
+        <?php if (isset($_SESSION["login"])) : ?>
+            <?php if (!$esSeguidor) : ?>
+                <a href="<?= $URL_PATH ?>/seguir/<?= $post->usuario_login ?>/<?= $post->id ?>" class="btn btn-primary">Seguir</a>
+            <?php else : ?>
+                <a href="<?= $URL_PATH ?>/dejarSeguir/<?= $post->usuario_login ?>/<?= $post->id ?>" class="btn btn-danger">Dejar de seguir</a>
+            <?php endif ?>
+        <?php endif ?>
+        <div>Siguiendo: <?= $siguiendo ?>. Seguidores: <?= $seguidores ?>.</div>
     </div>
 </div>
 
