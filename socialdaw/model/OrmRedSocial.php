@@ -100,7 +100,8 @@ class OrmRedSocial
         return $bd->queryOne($sql, [$idPost])["COUNT(*)"];
     }
 
-    function leHaDadoLike($idPost, $usuario) {
+    function leHaDadoLike($idPost, $usuario)
+    {
         $bd = Klasto::getInstance();
         $sql = "SELECT COUNT(*) FROM `like` WHERE post_id = ? AND usuario_login = ?";
         return $bd->queryOne($sql, [$idPost, $usuario])["COUNT(*)"] > 0;
@@ -123,6 +124,12 @@ class OrmRedSocial
         return true; // Sí tiene like
     }
 
-    // para la tabla like tiene que llevar ''
+    function obtenerCategorias()
+    {
+        $bd = Klasto::getInstance();
+        $sql = "SELECT id, descripcion FROM categoria_post";
+        return $bd->query($sql, []);
+    }
+
     // now() para insertar fecha
 }

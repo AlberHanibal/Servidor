@@ -82,8 +82,14 @@ class RedSocialController extends Controller
         header("Location: $URL_PATH/");
     }
 
-    function publicarPost() {
+    function formularioPost() {
+        $title = "Formulario Post";
+        $categorias = (new OrmRedSocial)->obtenerCategorias();
+        echo Ti::render("view/FormularioPostView.phtml", compact('title', 'categorias'));
+    }
 
+    function publicarPost() {
+        // cosas
     }
 
     function post($id) {
