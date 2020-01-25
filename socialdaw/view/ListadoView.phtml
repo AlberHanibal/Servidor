@@ -15,8 +15,25 @@ Ti::extend("view/MainView.phtml"); ?>
         <div class="col-md-7">
             <?= $post->resumen ?><br>
             <div class="row">
-                <!-- falta escoger tamaño para el boton y luego añadir div con otro tamaño para el like y comentario, mirar código -->
-                <a class="btn btn-info" href=" <?= $URL_PATH ?>/post/<?= $post->id ?>" role="button">Ver más</a>
+                <div class="col-md-6">
+                    <a class="btn btn-info" href=" <?= $URL_PATH ?>/post/<?= $post->id ?>" role="button">Ver más</a>
+                </div>
+                <div class="col-md-5">
+                <?php if (isset($_SESSION["login"])): ?>
+                    <a href="javascript:void(0)" onclick="likeClicked(<?= $post->id ?>)">
+                    <?php endif ?>
+                        <?php /* El atributo id del elemento del corazón tiene como sufijo el id del post */?>
+                        <i id="likecorazon<?= $post->id ?>" class="fa fa-heart<?= ($post->like ? " text-danger" : "") ?>"></i>
+                    <?php if (isset($_SESSION["login"])): ?>                        
+                    </a>
+                    <?php endif ?>
+                    <?php /* Lo mismo para el elemento que contiene la cuenta de likes:
+                             su atributo id contiene como sufijo el id del post */?>
+                    <span id="likecontador<?= $post->id ?>">
+                        <?= $post->numLikes ?>
+                    </span>
+                    <i class="fa fa-comments"></i> <?= $post->numComentarios ?>
+                </div>                
             </div>
 
         </div>

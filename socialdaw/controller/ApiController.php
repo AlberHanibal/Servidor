@@ -23,8 +23,8 @@ class ApiController extends Controller
         // Programar para que
         // devuelva el estado y la cantidad de likes para un post
         // dado su id
-        $data["estado"] = (bool) rand(0, 1);
-        $data["numLikes"] = rand(0, 100);
+        $data["estado"] = (new OrmRedSocial)->darOQuitarLike($postid, $_SESSION["login"]);
+        $data["numLikes"] = (new OrmRedSocial)->numLikes($postid);
 
         echo json_encode($data);
     }

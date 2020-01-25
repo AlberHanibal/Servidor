@@ -10,7 +10,11 @@ class RedSocialController extends Controller
     function listado() {
         $title = "Listado";
         $posts = (new OrmRedSocial)->obtenerTodosLosPost();
-        // $posts = (new OrmRedSocial)->obtenerUnPost(1);
+        if (isset($_SESSION["login"])) {
+            foreach ($posts as $post) {
+                $post->like = (new OrmRedSocial)->leHaDadoLike($post->id, $_SESSION["login"]);
+            }
+        }
         echo Ti::render("view/ListadoView.phtml", compact('title', 'posts'));
     }
 

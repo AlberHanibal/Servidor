@@ -59,12 +59,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "ada2011dfa3e2954528e344a77f5412cc41dbd66"
+                "reference": "3350931585b9fc061bf6ddc56847caa748c79010"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/ada2011dfa3e2954528e344a77f5412cc41dbd66",
-                "reference": "ada2011dfa3e2954528e344a77f5412cc41dbd66",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/3350931585b9fc061bf6ddc56847caa748c79010",
+                "reference": "3350931585b9fc061bf6ddc56847caa748c79010",
                 "shasum": ""
             },
             "replace": {
@@ -97,7 +97,7 @@
                 "sass",
                 "web"
             ],
-            "time": "2020-01-21T11:36:00+00:00"
+            "time": "2020-01-25T13:58:32+00:00"
         },
         {
             "name": "victorjfg/dawfony",
