@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function mostrarPosts(id) {
+            fetch('https://jsonplaceholder.typicode.com/posts?userId=' + id)
+                .then(response => response.json())
+                .then(json => {
+                    let lista = document.getElementById("posts");
+                    lista.textContent = "Posts del usuario " + id;
+                    for (const post of json) {
+                        let nodoLi = document.createElement("LI");
+                        nodoLi.textContent = post.title;
+                        lista.appendChild(nodoLi);
+                        }
+                })
+        }
+
+    </script>
+</head>
+
+<body>
+    <button onclick="mostrarPosts(1)">Usuario1</button>
+    <button onclick="mostrarPosts(2)">Usuario2</button>
+    <button onclick="mostrarPosts(3)">Usuario3</button>
+    <br>
+    <ul id="posts">
+    </ul>
+</body>
+
+</html>
