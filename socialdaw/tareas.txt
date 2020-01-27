@@ -1,6 +1,4 @@
 paginación
-<<<<<<< HEAD
-=======
 +++++++++++botón de añadir post, falta funcionalidad ESTAMOS POR AQUI
 >>>>>>> fc0064b547bfc66fb291c7ab00d17adb89d058ee
 quitar comprobación en el login (poner 1 solo)

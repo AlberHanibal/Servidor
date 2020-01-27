@@ -91,7 +91,6 @@ class RedSocialController extends Controller
     }
 
     function publicarPost() {
-<<<<<<< HEAD
         global $URL_PATH;
         $post = new Post;
         $post->fecha = date('Y-m-d H:i:s');
@@ -103,9 +102,7 @@ class RedSocialController extends Controller
         move_uploaded_file($_FILES["foto"]["tmp_name"], "assets/photos/" . $post->foto);
         (new OrmRedSocial)->insertarPost($post);
         header("Location: " . $URL_PATH. "/post/" . $post->id);
-=======
-        // cosas
->>>>>>> fc0064b547bfc66fb291c7ab00d17adb89d058ee
+
     }
 
     function post($id) {
