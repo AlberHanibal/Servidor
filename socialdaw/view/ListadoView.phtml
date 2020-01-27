@@ -25,7 +25,7 @@ Ti::extend("view/MainView.phtml"); ?>
                         <?php /* El atributo id del elemento del corazón tiene como sufijo el id del post */?>
                         <i id="likecorazon<?= $post->id ?>" class="fa fa-heart<?= ($post->like ? " text-danger" : "") ?>"></i>
                     <?php if (isset($_SESSION["login"])): ?>                        
-                    </a>
+                        </a>
                     <?php endif ?>
                     <?php /* Lo mismo para el elemento que contiene la cuenta de likes:
                              su atributo id contiene como sufijo el id del post */?>

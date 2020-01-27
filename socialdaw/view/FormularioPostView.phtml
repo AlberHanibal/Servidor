@@ -10,7 +10,7 @@ Ti::extend("view/MainView.phtml"); ?>
 <?php Ti::startBlock("content"); ?>
 <h2>Nuevo Post</h2>
 <div class="col-md-6">
-    <form action="<?=$URL_PATH?>/publicarPost" method="POST">
+    <form action="<?=$URL_PATH?>/publicarPost" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="resumen">Resumen</label>
             <textarea class="form-control" id="resumen" name="resumen" rows="2"></textarea>

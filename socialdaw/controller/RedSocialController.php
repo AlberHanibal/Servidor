@@ -1,9 +1,11 @@
 <?php
 namespace controller;
 
+require_once "funciones.php";
 use dawfony\Ti;
 use model\OrmRedSocial;
 use model\Usuario;
+use model\Post;
 
 class RedSocialController extends Controller
 {
@@ -89,7 +91,17 @@ class RedSocialController extends Controller
     }
 
     function publicarPost() {
-        // cosas
+        global $URL_PATH;
+        $post = new Post;
+        $post->fecha = date('Y-m-d H:i:s');
+        $post->resumen = sanitizar($_REQUEST["resumen"]);
+        $post->texto = sanitizar($_REQUEST["texto"]);
+        $post->foto = $_FILES["foto"]["name"];
+        $post->categoria_post_id = $_REQUEST["categoria_id"];
+        $post->usuario_login = $_SESSION["login"];
+        move_uploaded_file($_FILES["foto"]["tmp_name"], "assets/photos/" . $post->foto);
+        (new OrmRedSocial)->insertarPost($post);
+        header("Location: " . $URL_PATH. "/post/" . $post->id);
     }
 
     function post($id) {

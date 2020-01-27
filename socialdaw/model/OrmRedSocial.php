@@ -59,7 +59,6 @@ class OrmRedSocial
 
     function esSeguidor($seguidor, $seguido)
     {
-        // esta mal la select
         $bd = Klasto::getInstance();
         $sql = "SELECT usuario_login_seguidor, usuario_login_seguido FROM sigue WHERE usuario_login_seguido = ? AND usuario_login_seguidor = ?";
         return $bd->queryOne($sql, [$seguidor, $seguido]);
@@ -131,5 +130,11 @@ class OrmRedSocial
         return $bd->query($sql, []);
     }
 
-    // now() para insertar fecha
+    function insertarPost(&$post) {
+        $bd = Klasto::getInstance();
+        $sql = "INSERT INTO post (fecha, resumen, texto, foto, categoria_post_id, usuario_login) VALUES (?, ?, ?, ?, ?, ?)";
+        $bd->execute($sql, [$post->fecha, $post->resumen, $post->texto, $post->foto, $post->categoria_post_id, $post->usuario_login]);
+        $post->id = $bd->getInsertId();
+    }
+
 }
