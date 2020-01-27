@@ -52,7 +52,11 @@ Macaw::post($URL_PATH . '/login', "controller\RedSocialController@recibirLogin")
 Macaw::get($URL_PATH . '/cerrarSesion', "controller\RedSocialController@cerrarSesion");
 
 Macaw::get($URL_PATH . '/formularioPost', "controller\RedSocialController@formularioPost");
+<<<<<<< HEAD
 Macaw::post($URL_PATH . '/publicarPost', "controller\RedSocialController@publicarPost");
+=======
+Macaw::get($URL_PATH . '/publicarPost', "controller\RedSocialController@publicarPost");
+>>>>>>> fc0064b547bfc66fb291c7ab00d17adb89d058ee
 
 Macaw::get($URL_PATH . '/post/(:any)', "controller\RedSocialController@post");
 

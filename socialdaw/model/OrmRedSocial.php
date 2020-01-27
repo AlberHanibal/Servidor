@@ -130,6 +130,7 @@ class OrmRedSocial
         return $bd->query($sql, []);
     }
 
+<<<<<<< HEAD
     function insertarPost(&$post) {
         $bd = Klasto::getInstance();
         $sql = "INSERT INTO post (fecha, resumen, texto, foto, categoria_post_id, usuario_login) VALUES (?, ?, ?, ?, ?, ?)";
@@ -137,4 +138,7 @@ class OrmRedSocial
         $post->id = $bd->getInsertId();
     }
 
+=======
+    // now() para insertar fecha
+>>>>>>> fc0064b547bfc66fb291c7ab00d17adb89d058ee
 }
