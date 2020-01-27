@@ -137,4 +137,16 @@ class OrmRedSocial
         $post->id = $bd->getInsertId();
     }
 
+    function insertarComentario($comentario) {
+        $bd = Klasto::getInstance();
+        $sql = "INSERT INTO comenta (post_id, usuario_login, fecha, texto) VALUES (?, ?, ?, ?)";
+        return $bd->execute($sql, [$comentario->post_id, $comentario->usuario_login, $comentario->fecha, $comentario->texto]);
+    }
+
+    function obtenerComentarios($id) {
+        $bd = Klasto::getInstance();
+        $sql = "SELECT post_id, usuario_login, fecha, texto FROM comenta WHERE post_id = ?";
+        return $bd->query($sql, [$id], "model\Comentario");
+    }
+
 }

@@ -55,6 +55,7 @@ Macaw::get($URL_PATH . '/formularioPost', "controller\RedSocialController@formul
 Macaw::post($URL_PATH . '/publicarPost', "controller\RedSocialController@publicarPost");
 
 Macaw::get($URL_PATH . '/post/(:any)', "controller\RedSocialController@post");
+Macaw::post($URL_PATH . '/post/(:any)/comentario', "controller\RedSocialController@insertarComentario");
 
 Macaw::get($URL_PATH . '/seguir/(:any)/(:any)', "controller\RedSocialController@seguir");
 

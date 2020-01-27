@@ -6,6 +6,7 @@ use dawfony\Ti;
 use model\OrmRedSocial;
 use model\Usuario;
 use model\Post;
+use model\Comentario;
 
 class RedSocialController extends Controller
 {
@@ -102,19 +103,30 @@ class RedSocialController extends Controller
         move_uploaded_file($_FILES["foto"]["tmp_name"], "assets/photos/" . $post->foto);
         (new OrmRedSocial)->insertarPost($post);
         header("Location: " . $URL_PATH. "/post/" . $post->id);
+    }
 
+    function insertarComentario($id) {
+        global $URL_PATH;
+        $comentario = new Comentario;
+        $comentario->post_id = $id;
+        $comentario->usuario_login = $_SESSION["login"];
+        $comentario->fecha = date('Y-m-d H:i:s');
+        $comentario->texto = sanitizar($_REQUEST["comentario"]);
+        (new OrmRedSocial)->insertarComentario($comentario);
+        header("Location: " . $URL_PATH . "/post/" . $comentario->post_id);
     }
 
     function post($id) {
         $esSeguidor = false;
         $title = "Post";
         $post = (new OrmRedSocial)->obtenerUnPost($id);
+        $comentarios = (new OrmRedSocial)->obtenerComentarios($id);
         if (isset($_SESSION["login"])) {
             $esSeguidor = (new OrmRedSocial)->esSeguidor($post->usuario_login, $_SESSION["login"]);
         }
         $seguidores = (new OrmRedSocial)->seguidores($post->usuario_login);
         $siguiendo = (new OrmRedSocial)->siguiendo($post->usuario_login);
-        echo Ti::render("view/PostView.phtml", compact('title', 'post', 'esSeguidor', 'seguidores', 'siguiendo'));
+        echo Ti::render("view/PostView.phtml", compact('title', 'post', 'esSeguidor', 'seguidores', 'siguiendo', 'comentarios'));
     }
 
     function seguir($seguido, $id_post) {
