@@ -10,9 +10,13 @@ use model\Comentario;
 
 class RedSocialController extends Controller
 {
-    function listado() {
+    function listado($siguiendo = false) {
         $title = "Listado";
-        $posts = (new OrmRedSocial)->obtenerTodosLosPost();
+        if (!$siguiendo) {
+            $posts = (new OrmRedSocial)->obtenerTodosLosPost();
+        } else {
+            $posts = (new OrmRedSocial)->obtenerPostSeguidos($_SESSION["login"]);
+        }
         if (isset($_SESSION["login"])) {
             foreach ($posts as $post) {
                 $post->like = (new OrmRedSocial)->leHaDadoLike($post->id, $_SESSION["login"]);
@@ -129,21 +133,36 @@ class RedSocialController extends Controller
         echo Ti::render("view/PostView.phtml", compact('title', 'post', 'esSeguidor', 'seguidores', 'siguiendo', 'comentarios'));
     }
 
-    function seguir($seguido, $id_post) {
+    function seguir($seguido, $id_post = 0) {
         (new OrmRedSocial)->nuevoSeguidor($_SESSION["login"], $seguido);
         global $URL_PATH;
-        header("Location: $URL_PATH/post/$id_post");
+        if ($id_post == 0) {
+            header("Location: $URL_PATH/perfil/$seguido");
+        } else {
+            header("Location: $URL_PATH/post/$id_post");
+        }
+        
     }
 
-    function dejarSeguir($seguido, $id_post) {
+    function dejarSeguir($seguido, $id_post = 0) {
         (new OrmRedSocial)->dejarDeSeguir($_SESSION["login"], $seguido);
         global $URL_PATH;
-        header("Location: $URL_PATH/post/$id_post");
+        if ($id_post == 0) {
+            header("Location: $URL_PATH/perfil/$seguido");
+        } else {
+            header("Location: $URL_PATH/post/$id_post");
+        }
     }
 
-    function mostrarSiguiendo() {
-        $title = "Siguiendo";
-        $siguiendo = (new OrmRedSocial)->todosSiguiendo(($_SESSION["login"]));
-        echo Ti::render("view/SiguiendoView.phtml", compact('title', 'siguiendo'));
+    function perfil($login) {
+        $title = "Perfil";
+        $usuario = (new OrmRedSocial)->obtenerUsuario($login);
+        $posts = (new OrmRedSocial)->obtenerPostUsuario($login);
+        if (isset($_SESSION["login"])) {
+            $esSeguidor = (new OrmRedSocial)->esSeguidor($login, $_SESSION["login"]);
+        }
+        $seguidores = (new OrmRedSocial)->seguidores($login);
+        $siguiendo = (new OrmRedSocial)->siguiendo($login);
+        echo Ti::render("view/PerfilView.phtml", compact('title', 'usuario', 'posts', 'seguidores', 'siguiendo', 'esSeguidor'));
     }
 }

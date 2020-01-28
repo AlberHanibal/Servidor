@@ -1,0 +1,48 @@
+<?php
+
+use \dawfony\Ti;
+
+global $URL_PATH;
+Ti::extend("view/MainView.phtml"); ?>
+
+<?php Ti::startBlock("content"); ?>
+<div class="row col-md-3">
+    <h2><?= $usuario->login ?></h2>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div>
+            Nombre: <?= $usuario->nombre ?>
+            <br>
+            Email: <?= $usuario->email ?>
+            <br>
+            Siguiendo: <?= $siguiendo ?>. Seguidores: <?= $seguidores ?>.
+        </div>
+    </div>
+    <div class="col-md-2">
+        <?php if (isset($_SESSION["login"])) : ?>
+            <?php if ($_SESSION["login"] != $usuario->login) : ?>
+                <?php if (!$esSeguidor) : ?>
+                    <a href="<?= $URL_PATH ?>/seguir/<?= $usuario->login ?>" class="btn btn-primary">Seguir</a>
+                <?php else : ?>
+                    <a href="<?= $URL_PATH ?>/dejarSeguir/<?= $usuario->login ?>" class="btn btn-danger">Dejar de seguir</a>
+                <?php endif ?>
+            <?php endif ?>
+        <?php endif ?>
+    </div>
+</div>
+
+<h2>Posts</h2>
+<?php foreach ($posts as $post) : ?>
+    <div class="row">
+        <div class="col-md-7">
+            <?= $post->resumen ?> <a class="btn btn-info" href=" <?= $URL_PATH ?>/post/<?= $post->id ?>" role="button">Ver más</a>
+        </div>
+        <div class="col-md-3">
+            <?= $post->descripcion ?> a <?= $post->fecha ?>
+        </div>
+    </div>
+<?php endforeach ?>
+
+<?php Ti::endBlock(); ?>
+<?php Ti::endExtend() ?>

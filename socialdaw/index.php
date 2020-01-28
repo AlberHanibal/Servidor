@@ -42,6 +42,7 @@ Macaw::error(function() {
 */
 session_start();
 Macaw::get($URL_PATH . '/', "controller\RedSocialController@listado");
+Macaw::get($URL_PATH . '/(siguiendo)', "controller\RedSocialController@listado");
 
 Macaw::get($URL_PATH . '/registro', "controller\RedSocialController@registro");
 Macaw::post($URL_PATH . '/registro', "controller\RedSocialController@recibirRegistro");
@@ -57,11 +58,13 @@ Macaw::post($URL_PATH . '/publicarPost', "controller\RedSocialController@publica
 Macaw::get($URL_PATH . '/post/(:any)', "controller\RedSocialController@post");
 Macaw::post($URL_PATH . '/post/(:any)/comentario', "controller\RedSocialController@insertarComentario");
 
+Macaw::get($URL_PATH . '/seguir/(:any)', "controller\RedSocialController@seguir");
 Macaw::get($URL_PATH . '/seguir/(:any)/(:any)', "controller\RedSocialController@seguir");
 
+Macaw::get($URL_PATH . '/dejarSeguir/(:any)', "controller\RedSocialController@dejarSeguir");
 Macaw::get($URL_PATH . '/dejarSeguir/(:any)/(:any)', "controller\RedSocialController@dejarSeguir");
 
-Macaw::get($URL_PATH . '/siguiendo', "controller\RedSocialController@mostrarSiguiendo");
+Macaw::get($URL_PATH . '/perfil/(:any)', "controller\RedSocialController@perfil");
 
 Macaw::get($URL_PATH . '/api/like/(:num)', "controller\ApiController@likeClicked");
 // aqui para pillar excepciones

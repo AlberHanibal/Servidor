@@ -17,7 +17,7 @@ global $URL_PATH;
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="<?= $URL_PATH ?>/js/like.js"></script>
     <script>
-        var URL_PATH="<?= $URL_PATH ?>"; // Pasamos el URL_PATH de php a Javascript.
+        var URL_PATH = "<?= $URL_PATH ?>"; // Pasamos el URL_PATH de php a Javascript.
     </script>
     <title>
         <?php Ti::startBlock("title"); ?>
@@ -47,7 +47,7 @@ global $URL_PATH;
                             <a class="nav-link" href="<?= $URL_PATH ?>/siguiendo">Siguiendo</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= $URL_PATH ?>/perfil">Tu perfil</a>
+                            <a class="nav-link" href="<?= $URL_PATH ?>/perfil/<?= $_SESSION["login"] ?>">Tu perfil</a>
                         </li>
                         <li class="nav-item">
                             <a class="btn btn-outline-danger" href="<?= $URL_PATH ?>/cerrarSesion">Cerrar Sesión</a>
@@ -71,7 +71,10 @@ global $URL_PATH;
         <?php Ti::startBlock("content"); ?>
         <?php Ti::endBlock() ?>
         <?php if (isset($_SESSION["login"])) : ?>
-            <a href="<?= $URL_PATH ?>/formularioPost" class="btn btn-primary float-right font-weight-bold">+</a>
+            <div style="position:fixed;bottom:40px;right:40px;z-index:1">
+                <a style="font-size:50px" href="<?= $URL_PATH ?>/formularioPost"><i class="fa fa-plus-square text-primary"></i></a>
+            </div>
+
         <?php endif ?>
     </div>
 </body>

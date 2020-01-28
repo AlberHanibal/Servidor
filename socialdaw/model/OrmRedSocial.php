@@ -78,13 +78,6 @@ class OrmRedSocial
         return $bd->queryOne($sql, [$usuario])["COUNT(*)"];
     }
 
-    function todosSiguiendo($usuario)
-    {
-        $bd = Klasto::getInstance();
-        $sql = "SELECT usuario_login_seguido FROM sigue WHERE usuario_login_seguidor = ?";
-        return $bd->query($sql, [$usuario]);
-    }
-
     function numLikes($idPost)
     {
         $bd = Klasto::getInstance();
@@ -149,4 +142,20 @@ class OrmRedSocial
         return $bd->query($sql, [$id], "model\Comentario");
     }
 
+    function obtenerPostUsuario($usuario) {
+        $bd = Klasto::getInstance();
+        $sql = "SELECT post.id, fecha, resumen, texto, foto, categoria_post_id, usuario_login, descripcion FROM post JOIN categoria_post ON post.categoria_post_id = categoria_post.id WHERE post.usuario_login = ?";
+        return $bd->query($sql, [$usuario], "model\Post");
+    }
+
+    function obtenerPostSeguidos($usuario) {
+        $bd = Klasto::getInstance();
+        $sql = "SELECT post.id, fecha, resumen, texto, foto, categoria_post_id, usuario_login, descripcion FROM post JOIN categoria_post ON post.categoria_post_id = categoria_post.id JOIN sigue ON post.usuario_login = sigue.usuario_login_seguido WHERE ? = sigue.usuario_login_seguidor ";
+        $posts = $bd->query($sql, [$usuario], "model\Post");
+        foreach ($posts as $post) {
+            $post->numLikes = $this->numLikes($post->id);
+            $post->numComentarios = $this->numComentarios($post->id);
+        }
+        return $posts;
+    }
 }
