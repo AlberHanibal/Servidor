@@ -1,5 +1,5 @@
 {
-    "name": "victor/prudawfony",
+    "name": "alberhanibal/tienda",
     "type": "project",
     "require": {
         "noahbuscher/macaw": "dev-master",
