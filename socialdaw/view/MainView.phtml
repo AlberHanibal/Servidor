@@ -16,6 +16,7 @@ global $URL_PATH;
     <!-- <link rel="stylesheet" href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="<?= $URL_PATH ?>/js/like.js"></script>
+    <script src="<?= $URL_PATH ?>/js/comprobaciones.js"></script>
     <script>
         var URL_PATH = "<?= $URL_PATH ?>"; // Pasamos el URL_PATH de php a Javascript.
     </script>
@@ -50,7 +51,7 @@ global $URL_PATH;
                             <a class="nav-link" href="<?= $URL_PATH ?>/perfil/<?= $_SESSION["login"] ?>">Tu perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-outline-danger" href="<?= $URL_PATH ?>/cerrarSesion">Cerrar Sesión</a>
+                            <a class="btn btn-outline-danger" href="#" onclick="confirmarLogout()">Cerrar Sesión</a>
                         </li>
                     <?php else : ?>
                         <li class="nav-item">
