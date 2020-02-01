@@ -51,7 +51,7 @@ global $URL_PATH;
                             <a class="nav-link" href="<?= $URL_PATH ?>/perfil/<?= $_SESSION["login"] ?>">Tu perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-outline-danger" href="#" onclick="confirmarLogout()">Cerrar Sesión</a>
+                            <a class="btn btn-outline-danger" href="javascript:void(0)" onclick="confirmarLogout()">Cerrar Sesión</a>
                         </li>
                     <?php else : ?>
                         <li class="nav-item">

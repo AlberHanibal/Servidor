@@ -13,11 +13,11 @@ Ti::extend("view/MainView.phtml"); ?>
     <form action="<?=$URL_PATH?>/publicarPost" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="resumen">Resumen</label>
-            <textarea class="form-control" id="resumen" name="resumen" rows="2"></textarea>
+            <textarea class="form-control" id="resumen" name="resumen" rows="2" required></textarea>
         </div>
         <div class="form-group">
             <label for="texto">Texto Completo</label>
-            <textarea class="form-control" id="texto" name="texto" rows="5"></textarea>
+            <textarea class="form-control" id="texto" name="texto" rows="5" required></textarea>
         </div>
         <div class="form-group row">
             <div class="col-md-6">
@@ -30,7 +30,7 @@ Ti::extend("view/MainView.phtml"); ?>
             </div>
             <div class="col-md-6">
                 <label for="filefoto">Sube una foto:</label>
-                <input type="file" class="form-control-file" id="filefoto" name="foto">
+                <input type="file" class="form-control-file" id="filefoto" name="foto" pattern=".*\.(jpg|jpeg|gif|png|webp|svg)" required>
             </div>
         </div>
         <div class="form-group">

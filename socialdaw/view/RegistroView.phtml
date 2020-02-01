@@ -7,11 +7,12 @@ global $URL_PATH;
 Ti::extend("view/MainView.phtml"); ?>
 
 <?php Ti::startBlock("content"); ?>
-<form class="col-md-8 mx-auto mt-5" method="POST" action="<?= $URL_PATH?>/registro">
+<form class="col-md-8 mx-auto mt-5" method="POST" action="<?= $URL_PATH?>/registro" onsubmit="return comprobacionRegistro()">
     <div class="form-group row">
         <label for="login" class="col-sm-2 col-form-label">Login</label>
         <div class="col-sm-10">
             <input type="text" name="login" class="form-control" id="login">
+            <small class="form-text text-danger" id ="errorLogin"></small>
         </div>
     </div>
     <div class="form-group row">
@@ -24,12 +25,14 @@ Ti::extend("view/MainView.phtml"); ?>
         <label for="password2" class="col-sm-2 col-form-label">Repite contraseña</label>
         <div class="col-sm-10">
             <input type="password" name="password2" class="form-control" id="password2">
+            <small class="form-text text-danger" id ="errorContrasena"></small>
         </div>
     </div>
     <div class="form-group row">
         <label for="nombre" class="col-sm-2 col-form-label">Tu nombre</label>
         <div class="col-sm-10">
             <input type="text" name="nombre" class="form-control" id="nombre">
+            <small class="form-text text-danger" id ="errorNombre"></small>
         </div>
     </div>
     <div class="form-group row">
