@@ -31,7 +31,6 @@ class RedSocialController extends Controller
     }
 
     function recibirRegistro() {
-        // si comprobaciones falso -> RegistroView
         $usuario = new Usuario;
         $usuario->login = $_REQUEST["login"];
         $usuario->password = password_hash($_REQUEST["password"], PASSWORD_DEFAULT);
@@ -39,7 +38,6 @@ class RedSocialController extends Controller
         $usuario->email = $_REQUEST["email"];
         $usuario->rol_id = 0;
         (new OrmRedSocial)->insertarUsuario($usuario);
-        // comprobaciones bien 
         global $URL_PATH;
         header("Location: $URL_PATH/login");
     }
@@ -88,12 +86,18 @@ class RedSocialController extends Controller
     }
 
     function formularioPost() {
+        if (!isset($_SESSION["rol"])) {
+            throw new \Exception("Intento de inserción post de usuario no logueado");
+        }
         $title = "Formulario Post";
         $categorias = (new OrmRedSocial)->obtenerCategorias();
         echo Ti::render("view/FormularioPostView.phtml", compact('title', 'categorias'));
     }
 
     function publicarPost() {
+        if (!isset($_SESSION["rol"])) {
+            throw new \Exception("Intento de inserción post de usuario no logueado");
+        }
         global $URL_PATH;
         $post = new Post;
         $post->fecha = date('Y-m-d H:i:s');
@@ -108,6 +112,9 @@ class RedSocialController extends Controller
     }
 
     function insertarComentario($id) {
+        if (!isset($_SESSION["rol"])) {
+            throw new \Exception("Intento de inserción comentario de usuario no logueado");
+        }
         global $URL_PATH;
         $comentario = new Comentario;
         $comentario->post_id = $id;
@@ -132,6 +139,9 @@ class RedSocialController extends Controller
     }
 
     function seguir($seguido, $id_post = 0) {
+        if (!isset($_SESSION["rol"])) {
+            throw new \Exception("Intento de seguir de usuario no logueado");
+        }
         (new OrmRedSocial)->nuevoSeguidor($_SESSION["login"], $seguido);
         global $URL_PATH;
         if ($id_post == 0) {
@@ -143,6 +153,9 @@ class RedSocialController extends Controller
     }
 
     function dejarSeguir($seguido, $id_post = 0) {
+        if (!isset($_SESSION["rol"])) {
+            throw new \Exception("Intento de dejar de seguir de usuario no logueado");
+        }
         (new OrmRedSocial)->dejarDeSeguir($_SESSION["login"], $seguido);
         global $URL_PATH;
         if ($id_post == 0) {

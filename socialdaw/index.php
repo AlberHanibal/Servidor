@@ -67,5 +67,15 @@ Macaw::get($URL_PATH . '/dejarSeguir/(:any)/(:any)', "controller\RedSocialContro
 Macaw::get($URL_PATH . '/perfil/(:any)', "controller\RedSocialController@perfil");
 
 Macaw::get($URL_PATH . '/api/like/(:num)', "controller\ApiController@likeClicked");
+
+Macaw::get($URL_PATH . '/api/like/(:num)', "controller\ApiController@likeClicked");
+
+Macaw::error(function() {
+  (new \controller\ErrorController) -> urlNoEncontrada();
+});
 // aqui para pillar excepciones
-Macaw::dispatch();
+try {
+  Macaw::dispatch();
+} catch (Exception $ex) {
+  (new \controller\ErrorController) -> excepcionEncontrada($ex);
+}

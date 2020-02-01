@@ -1,0 +1,16 @@
+<?php
+
+use \dawfony\Ti;
+
+Ti::extend("view/MainView.phtml"); ?>
+<?php Ti::startBlock("content"); ?>
+<h2>Error 500</h2>
+<div class="alert alert-info col-md-6" role="alert">
+    Hemos tenido un error con alguno de nuestros servicios. Inténtelo más tarde.
+</div>
+<div class="alert alert-danger col-md-6" role="alert">
+    <pre><?= $ex ?></pre>
+</div>
+
+<?php Ti::endBlock(); ?>
+<?php Ti::endExtend() ?>
