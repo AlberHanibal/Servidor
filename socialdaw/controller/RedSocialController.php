@@ -10,19 +10,24 @@ use model\Comentario;
 
 class RedSocialController extends Controller
 {
-    function listado($siguiendo = false) {
+    function listado($siguiendo = false, $pagina = 1) {
+        global $config;
         $title = "Listado";
         if (!$siguiendo) {
-            $posts = (new OrmRedSocial)->obtenerTodosLosPost();
+            $posts = (new OrmRedSocial)->obtenerTodosLosPost($pagina);
+            $numPosts = (new OrmRedSocial)->numPosts();
         } else {
-            $posts = (new OrmRedSocial)->obtenerPostSeguidos($_SESSION["login"]);
+            $posts = (new OrmRedSocial)->obtenerPostSeguidos($_SESSION["login"], $pagina);
+            $numPosts = (new OrmRedSocial)->numPostSeguidos($_SESSION["login"]);
         }
         if (isset($_SESSION["login"])) {
             foreach ($posts as $post) {
                 $post->like = (new OrmRedSocial)->leHaDadoLike($post->id, $_SESSION["login"]);
             }
         }
-        echo Ti::render("view/ListadoView.phtml", compact('title', 'posts'));
+        
+        $numPaginas = ceil($numPosts / $config["post_per_page"]);
+        echo Ti::render("view/ListadoView.phtml", compact('title', 'posts', 'numPosts', 'numPaginas', 'pagina'));
     }
 
     function registro() {

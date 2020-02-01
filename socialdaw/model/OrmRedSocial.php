@@ -21,16 +21,27 @@ class OrmRedSocial
         return $bd->queryOne($sql, [$login], 'model\Usuario');
     }
 
-    function obtenerTodosLosPost()
+    function obtenerTodosLosPost($pagina = 1)
     {
         $bd = Klasto::getInstance();
-        $sql = "SELECT post.id, fecha, resumen, texto, foto, categoria_post_id, usuario_login, descripcion FROM post JOIN categoria_post ON post.categoria_post_id = categoria_post.id";
+        global $config;
+        $limit = $config["post_per_page"];
+        $offset = ($pagina -1 ) * $limit;
+        $sql = "SELECT post.id, fecha, resumen, texto, foto, categoria_post_id, usuario_login, descripcion FROM post JOIN categoria_post ON post.categoria_post_id = categoria_post.id " 
+        . " ORDER BY fecha DESC LIMIT $limit OFFSET $offset";
         $posts = $bd->query($sql, [], "model\Post");
         foreach ($posts as $post) {
             $post->numLikes = $this->numLikes($post->id);
             $post->numComentarios = $this->numComentarios($post->id);
         }
         return $posts;
+    }
+
+    function numPosts()
+    {
+        $bd = Klasto::getInstance();
+        $sql = "SELECT COUNT(*) FROM post";
+        return $bd->queryOne($sql, [])["COUNT(*)"];
     }
 
     function obtenerUnPost($id)
@@ -123,39 +134,56 @@ class OrmRedSocial
         return $bd->query($sql, []);
     }
 
-    function insertarPost(&$post) {
+    function insertarPost(&$post)
+    {
         $bd = Klasto::getInstance();
         $sql = "INSERT INTO post (fecha, resumen, texto, foto, categoria_post_id, usuario_login) VALUES (?, ?, ?, ?, ?, ?)";
         $bd->execute($sql, [$post->fecha, $post->resumen, $post->texto, $post->foto, $post->categoria_post_id, $post->usuario_login]);
         $post->id = $bd->getInsertId();
     }
 
-    function insertarComentario($comentario) {
+    function insertarComentario($comentario)
+    {
         $bd = Klasto::getInstance();
         $sql = "INSERT INTO comenta (post_id, usuario_login, fecha, texto) VALUES (?, ?, ?, ?)";
         return $bd->execute($sql, [$comentario->post_id, $comentario->usuario_login, $comentario->fecha, $comentario->texto]);
     }
 
-    function obtenerComentarios($id) {
+    function obtenerComentarios($id)
+    {
         $bd = Klasto::getInstance();
         $sql = "SELECT post_id, usuario_login, fecha, texto FROM comenta WHERE post_id = ?";
         return $bd->query($sql, [$id], "model\Comentario");
     }
 
-    function obtenerPostUsuario($usuario) {
+    function obtenerPostUsuario($usuario)
+    {
         $bd = Klasto::getInstance();
-        $sql = "SELECT post.id, fecha, resumen, texto, foto, categoria_post_id, usuario_login, descripcion FROM post JOIN categoria_post ON post.categoria_post_id = categoria_post.id WHERE post.usuario_login = ?";
+        $sql = "SELECT post.id, fecha, resumen, texto, foto, categoria_post_id, usuario_login, descripcion FROM post JOIN categoria_post ON post.categoria_post_id = categoria_post.id " 
+        . " WHERE post.usuario_login = ?";
         return $bd->query($sql, [$usuario], "model\Post");
     }
 
-    function obtenerPostSeguidos($usuario) {
+    function obtenerPostSeguidos($usuario, $pagina = 1)
+    {
         $bd = Klasto::getInstance();
-        $sql = "SELECT post.id, fecha, resumen, texto, foto, categoria_post_id, usuario_login, descripcion FROM post JOIN categoria_post ON post.categoria_post_id = categoria_post.id JOIN sigue ON post.usuario_login = sigue.usuario_login_seguido WHERE ? = sigue.usuario_login_seguidor ";
+        global $config;
+        $limit = $config["post_per_page"];
+        $offset = ($pagina -1 ) * $limit;
+        $sql = "SELECT post.id, fecha, resumen, texto, foto, categoria_post_id, usuario_login, descripcion FROM post JOIN categoria_post ON post.categoria_post_id = categoria_post.id "
+        . " JOIN sigue ON post.usuario_login = sigue.usuario_login_seguido WHERE ? = sigue.usuario_login_seguidor ORDER BY fecha DESC LIMIT $limit OFFSET $offset";
         $posts = $bd->query($sql, [$usuario], "model\Post");
         foreach ($posts as $post) {
             $post->numLikes = $this->numLikes($post->id);
             $post->numComentarios = $this->numComentarios($post->id);
         }
         return $posts;
+    }
+
+    function numPostSeguidos($usuario)
+    {
+        $bd = Klasto::getInstance();
+        $sql = "SELECT COUNT(*) FROM post JOIN sigue WHERE sigue.usuario_login_seguidor = ?";
+        return $bd->queryOne($sql, [$usuario])["COUNT(*)"];
     }
 }

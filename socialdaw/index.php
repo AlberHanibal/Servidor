@@ -42,7 +42,9 @@ Macaw::error(function() {
 */
 session_start();
 Macaw::get($URL_PATH . '/', "controller\RedSocialController@listado");
+Macaw::get($URL_PATH . '/pagina/(:num)', "controller\RedSocialController@listado");
 Macaw::get($URL_PATH . '/(siguiendo)', "controller\RedSocialController@listado");
+
 
 Macaw::get($URL_PATH . '/registro', "controller\RedSocialController@registro");
 Macaw::post($URL_PATH . '/registro', "controller\RedSocialController@recibirRegistro");
