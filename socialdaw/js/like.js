@@ -4,6 +4,7 @@ function likeClicked(postid) {
         .then((res) => res.json())
         .then((res) => {
             // res contiene un objeto con la respuesta json del servidor.
+            console.log("Dentro del fetch")
             console.log(res);
             var corazonEl = document.querySelector("#likecorazon" + postid);
             var contadorEl = document.querySelector("#likecontador" + postid);

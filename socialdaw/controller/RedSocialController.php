@@ -1,7 +1,9 @@
 <?php
+
 namespace controller;
 
 require_once "funciones.php";
+
 use dawfony\Ti;
 use model\OrmRedSocial;
 use model\Usuario;
@@ -10,32 +12,48 @@ use model\Comentario;
 
 class RedSocialController extends Controller
 {
-    function listado($siguiendo = false, $pagina = 1) {
+    function listado($pagina = 1)
+    {
+        global $URL_PATH;
         global $config;
         $title = "Listado";
-        if (!$siguiendo) {
-            $posts = (new OrmRedSocial)->obtenerTodosLosPost($pagina);
-            $numPosts = (new OrmRedSocial)->numPosts();
-        } else {
-            $posts = (new OrmRedSocial)->obtenerPostSeguidos($_SESSION["login"], $pagina);
-            $numPosts = (new OrmRedSocial)->numPostSeguidos($_SESSION["login"]);
-        }
+        $posts = (new OrmRedSocial)->obtenerTodosLosPost($pagina);
+        $numPosts = (new OrmRedSocial)->numPosts();
+        $ruta = $URL_PATH . "/pagina/";
         if (isset($_SESSION["login"])) {
             foreach ($posts as $post) {
                 $post->like = (new OrmRedSocial)->leHaDadoLike($post->id, $_SESSION["login"]);
             }
         }
-        
         $numPaginas = ceil($numPosts / $config["post_per_page"]);
-        echo Ti::render("view/ListadoView.phtml", compact('title', 'posts', 'numPosts', 'numPaginas', 'pagina'));
+        echo Ti::render("view/ListadoView.phtml", compact('title', 'posts', 'numPosts', 'numPaginas', 'pagina', 'ruta'));
     }
 
-    function registro() {
+    function listadoSiguiendo($pagina = 1)
+    {
+        global $URL_PATH;
+        global $config;
+        $title = "Listado Siguiendo";
+        $posts = (new OrmRedSocial)->obtenerPostSeguidos($_SESSION["login"], $pagina);
+        $numPosts = (new OrmRedSocial)->numPostSeguidos($_SESSION["login"]);
+        $ruta = $URL_PATH . "/siguiendo/pagina/";
+        if (isset($_SESSION["login"])) {
+            foreach ($posts as $post) {
+                $post->like = (new OrmRedSocial)->leHaDadoLike($post->id, $_SESSION["login"]);
+            }
+        }
+        $numPaginas = ceil($numPosts / $config["post_per_page"]);
+        echo Ti::render("view/ListadoView.phtml", compact('title', 'posts', 'numPosts', 'numPaginas', 'pagina', 'ruta'));
+    }
+
+    function registro()
+    {
         $title = "Registro";
         echo Ti::render("view/RegistroView.phtml", compact('title'));
     }
 
-    function recibirRegistro() {
+    function recibirRegistro()
+    {
         $usuario = new Usuario;
         $usuario->login = $_REQUEST["login"];
         $usuario->password = password_hash($_REQUEST["password"], PASSWORD_DEFAULT);
@@ -47,14 +65,16 @@ class RedSocialController extends Controller
         header("Location: $URL_PATH/login");
     }
 
-    function login() {
+    function login()
+    {
         $login = "";
         $error = "";
         $title = "Login";
         echo Ti::render("view/LoginView.phtml", compact('title', 'login', 'error'));
     }
 
-    function recibirLogin() {
+    function recibirLogin()
+    {
         $login = $_REQUEST["login"];
         $password = $_REQUEST["password"];
         $error = "";
@@ -80,17 +100,18 @@ class RedSocialController extends Controller
             $title = "Login";
             echo Ti::render("view/LoginView.phtml", compact('title', 'login', 'error'));
         }
-        
     }
 
-    function cerrarSesion() {
+    function cerrarSesion()
+    {
         session_start();
         session_destroy();
         global $URL_PATH;
         header("Location: $URL_PATH/");
     }
 
-    function formularioPost() {
+    function formularioPost()
+    {
         if (!isset($_SESSION["rol"])) {
             throw new \Exception("Intento de inserción post de usuario no logueado");
         }
@@ -99,7 +120,8 @@ class RedSocialController extends Controller
         echo Ti::render("view/FormularioPostView.phtml", compact('title', 'categorias'));
     }
 
-    function publicarPost() {
+    function publicarPost()
+    {
         if (!isset($_SESSION["rol"])) {
             throw new \Exception("Intento de inserción post de usuario no logueado");
         }
@@ -113,10 +135,11 @@ class RedSocialController extends Controller
         $post->usuario_login = $_SESSION["login"];
         move_uploaded_file($_FILES["foto"]["tmp_name"], "assets/photos/" . $post->foto);
         (new OrmRedSocial)->insertarPost($post);
-        header("Location: " . $URL_PATH. "/post/" . $post->id);
+        header("Location: " . $URL_PATH . "/post/" . $post->id);
     }
 
-    function insertarComentario($id) {
+    function insertarComentario($id)
+    {
         if (!isset($_SESSION["rol"])) {
             throw new \Exception("Intento de inserción comentario de usuario no logueado");
         }
@@ -130,7 +153,8 @@ class RedSocialController extends Controller
         header("Location: " . $URL_PATH . "/post/" . $comentario->post_id);
     }
 
-    function post($id) {
+    function post($id)
+    {
         $esSeguidor = false;
         $title = "Post";
         $post = (new OrmRedSocial)->obtenerUnPost($id);
@@ -143,7 +167,8 @@ class RedSocialController extends Controller
         echo Ti::render("view/PostView.phtml", compact('title', 'post', 'esSeguidor', 'seguidores', 'siguiendo', 'comentarios'));
     }
 
-    function seguir($seguido, $id_post = 0) {
+    function seguir($seguido, $id_post = 0)
+    {
         if (!isset($_SESSION["rol"])) {
             throw new \Exception("Intento de seguir de usuario no logueado");
         }
@@ -154,10 +179,10 @@ class RedSocialController extends Controller
         } else {
             header("Location: $URL_PATH/post/$id_post");
         }
-        
     }
 
-    function dejarSeguir($seguido, $id_post = 0) {
+    function dejarSeguir($seguido, $id_post = 0)
+    {
         if (!isset($_SESSION["rol"])) {
             throw new \Exception("Intento de dejar de seguir de usuario no logueado");
         }
@@ -170,7 +195,8 @@ class RedSocialController extends Controller
         }
     }
 
-    function perfil($login) {
+    function perfil($login)
+    {
         $title = "Perfil";
         $usuario = (new OrmRedSocial)->obtenerUsuario($login);
         $posts = (new OrmRedSocial)->obtenerPostUsuario($login);

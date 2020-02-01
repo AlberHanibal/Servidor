@@ -43,14 +43,14 @@ Ti::extend("view/MainView.phtml"); ?>
 <?php endforeach ?>
 <nav aria-label="Page navigation" class="mt-2">
     <ul class="pagination justify-content-center">
-        <li class="page-item<?=($pagina - 1 < 1 ? " disabled":"")?>">
-            <a class="page-link" href="<?= $URL_PATH . "/pagina/" . ($pagina - 1) ?>" tabindex="-1"><<<</a>
+        <li class="page-item<?= ($pagina - 1 < 1 ? " disabled" : "") ?>">
+            <a class="page-link" href="<?= $ruta . ($pagina - 1) ?>" tabindex="-1"><i class="fa fa-reply"></i></a>
         </li>
         <li class="page-item active">
-        <a class="page-link" href="#"><?= $pagina ?></a>
-    </li>
-        <li class="page-item<?=($pagina + 1 > $numPaginas ? " disabled":"")?>" >
-            <a class="page-link" href="<?= $URL_PATH . "/pagina/" . ($pagina + 1) ?>">>>></a>
+            <a class="page-link" href="#"><?= $pagina ?></a>
+        </li>
+        <li class="page-item<?= ($pagina + 1 > $numPaginas ? " disabled" : "") ?>">
+            <a class="page-link" href="<?= $ruta . ($pagina + 1) ?>"><i class="fa fa-share"></i></a>
         </li>
     </ul>
 </nav>

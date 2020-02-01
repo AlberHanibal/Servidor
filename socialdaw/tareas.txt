@@ -1,2 +1,1 @@
-paginación y order by fecha de los posts
-meter nuevos datos
+funcionalidad de admin

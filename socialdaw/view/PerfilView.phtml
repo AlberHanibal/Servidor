@@ -34,7 +34,7 @@ Ti::extend("view/MainView.phtml"); ?>
 
 <h2>Posts</h2>
 <?php foreach ($posts as $post) : ?>
-    <div class="row">
+    <div class="row mt-1">
         <div class="col-md-7">
             <?= $post->resumen ?> <a class="btn btn-info" href=" <?= $URL_PATH ?>/post/<?= $post->id ?>" role="button">Ver más</a>
         </div>
