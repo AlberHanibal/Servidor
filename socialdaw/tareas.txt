@@ -2,4 +2,3 @@ paginación y order by fecha de los posts
 quitar comprobación en el login (poner 1 solo)
 meter comprobaciones js
 meter nuevos datos
-comprobacion de logout confirm()

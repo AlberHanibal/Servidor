@@ -46,26 +46,24 @@ class RedSocialController extends Controller
 
     function login() {
         $login = "";
-        $errorLogin = "";
-        $errorPassword = "";
+        $error = "";
         $title = "Login";
-        echo Ti::render("view/LoginView.phtml", compact('title', 'login', 'errorLogin', 'errorPassword'));
+        echo Ti::render("view/LoginView.phtml", compact('title', 'login', 'error'));
     }
 
     function recibirLogin() {
         $login = $_REQUEST["login"];
         $password = $_REQUEST["password"];
-        $errorLogin = "";
-        $errorPassword = "";
+        $error = "";
         $hayErrores = false;
         $usuario = (new OrmRedSocial)->obtenerUsuario($login);
         if (!$usuario) {
-            $errorLogin = "Login incorrecto";
+            $error = "Login incorrecto o contraseña incorrecta";
             $login = "";
             $hayErrores = true;
         } else {
             if (!password_verify($password, $usuario->password)) {
-                $errorPassword = "Contraseña incorrecta";
+                $error = "Login incorrecto o contraseña incorrecta";
                 $hayErrores = true;
             }
         }
@@ -77,7 +75,7 @@ class RedSocialController extends Controller
             header("Location: $URL_PATH/");
         } else {
             $title = "Login";
-            echo Ti::render("view/LoginView.phtml", compact('title', 'login', 'errorLogin', 'errorPassword'));
+            echo Ti::render("view/LoginView.phtml", compact('title', 'login', 'error'));
         }
         
     }
