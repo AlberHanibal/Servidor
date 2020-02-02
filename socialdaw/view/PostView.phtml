@@ -11,10 +11,10 @@ Ti::extend("view/MainView.phtml"); ?>
     <h3><?= $post->resumen ?></h3>
 </div>
 <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-4">
         <img src="<?= $URL_PATH ?>/assets/photos/<?= $post->foto ?>" alt="<?= $post->foto ?>" class="img-fluid">
     </div>
-    <div class="col-md-7">
+    <div class="col-md-5">
         <?= $post->texto ?>
     </div>
     <div class="col-md-1">
@@ -51,7 +51,7 @@ Ti::extend("view/MainView.phtml"); ?>
                 <?= $comentario->texto ?>
             </div>
             <div class="col-md-2">
-                <?= $comentario->usuario_login ?> a <?= $comentario->fecha ?>
+            <a href="<?= $URL_PATH ?>/perfil/<?= $comentario->usuario_login ?>"><?= $comentario->usuario_login ?></a> a <?= $comentario->fecha ?>
             </div>
         <?php endforeach ?>
     </div>

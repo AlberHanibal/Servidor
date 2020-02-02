@@ -25,3 +25,15 @@ function comprobacionRegistro() {
     }
     return datosBuenos;
 }
+
+function confirmarBorrarPost(postId) {
+    if (confirm("¿Seguro que quiere borrar este post?")) {
+        location.href=URL_PATH + "/borrarPost/" + postId;
+    }
+}
+
+function confirmarBorrarUsuario(login) {
+    if (confirm("¿Seguro que quiere borrar este usuario?")) {
+        location.href=URL_PATH + "/borrarUsuario/" + login;
+    }
+}

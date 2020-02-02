@@ -71,6 +71,10 @@ Macaw::get($URL_PATH . '/perfil/(:any)', "controller\RedSocialController@perfil"
 
 Macaw::get($URL_PATH . '/api/like/(:num)', "controller\ApiController@likeClicked");
 
+Macaw::get($URL_PATH . '/borrarPost/(:any)', "controller\AdminController@borrarPost");
+
+Macaw::get($URL_PATH . '/borrarUsuario/(:any)', "controller\AdminController@borrarUsuario");
+
 Macaw::error(function() {
   (new \controller\ErrorController) -> urlNoEncontrada();
 });

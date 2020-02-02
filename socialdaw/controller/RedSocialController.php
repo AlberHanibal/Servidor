@@ -200,6 +200,7 @@ class RedSocialController extends Controller
         $title = "Perfil";
         $usuario = (new OrmRedSocial)->obtenerUsuario($login);
         $posts = (new OrmRedSocial)->obtenerPostUsuario($login);
+        $esSeguidor = false;
         if (isset($_SESSION["login"])) {
             $esSeguidor = (new OrmRedSocial)->esSeguidor($login, $_SESSION["login"]);
         }

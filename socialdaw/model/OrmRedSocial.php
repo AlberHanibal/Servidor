@@ -26,9 +26,9 @@ class OrmRedSocial
         $bd = Klasto::getInstance();
         global $config;
         $limit = $config["post_per_page"];
-        $offset = ($pagina -1 ) * $limit;
-        $sql = "SELECT post.id, fecha, resumen, texto, foto, categoria_post_id, usuario_login, descripcion FROM post JOIN categoria_post ON post.categoria_post_id = categoria_post.id " 
-        . " ORDER BY fecha DESC LIMIT $limit OFFSET $offset";
+        $offset = ($pagina - 1) * $limit;
+        $sql = "SELECT post.id, fecha, resumen, texto, foto, categoria_post_id, usuario_login, descripcion FROM post JOIN categoria_post ON post.categoria_post_id = categoria_post.id "
+            . " ORDER BY fecha DESC LIMIT $limit OFFSET $offset";
         $posts = $bd->query($sql, [], "model\Post");
         foreach ($posts as $post) {
             $post->numLikes = $this->numLikes($post->id);
@@ -152,15 +152,15 @@ class OrmRedSocial
     function obtenerComentarios($id)
     {
         $bd = Klasto::getInstance();
-        $sql = "SELECT post_id, usuario_login, fecha, texto FROM comenta WHERE post_id = ?";
+        $sql = "SELECT post_id, usuario_login, fecha, texto FROM comenta WHERE post_id = ? ORDER BY fecha DESC";
         return $bd->query($sql, [$id], "model\Comentario");
     }
 
     function obtenerPostUsuario($usuario)
     {
         $bd = Klasto::getInstance();
-        $sql = "SELECT post.id, fecha, resumen, texto, foto, categoria_post_id, usuario_login, descripcion FROM post JOIN categoria_post ON post.categoria_post_id = categoria_post.id " 
-        . " WHERE post.usuario_login = ?";
+        $sql = "SELECT post.id, fecha, resumen, texto, foto, categoria_post_id, usuario_login, descripcion FROM post JOIN categoria_post ON post.categoria_post_id = categoria_post.id "
+            . " WHERE post.usuario_login = ?";
         return $bd->query($sql, [$usuario], "model\Post");
     }
 
@@ -169,9 +169,9 @@ class OrmRedSocial
         $bd = Klasto::getInstance();
         global $config;
         $limit = $config["post_per_page"];
-        $offset = ($pagina -1 ) * $limit;
+        $offset = ($pagina - 1) * $limit;
         $sql = "SELECT post.id, fecha, resumen, texto, foto, categoria_post_id, usuario_login, descripcion FROM post JOIN categoria_post ON post.categoria_post_id = categoria_post.id "
-        . " JOIN sigue ON post.usuario_login = sigue.usuario_login_seguido WHERE ? = sigue.usuario_login_seguidor ORDER BY fecha DESC LIMIT $limit OFFSET $offset";
+            . " JOIN sigue ON post.usuario_login = sigue.usuario_login_seguido WHERE ? = sigue.usuario_login_seguidor ORDER BY fecha DESC LIMIT $limit OFFSET $offset";
         $posts = $bd->query($sql, [$usuario], "model\Post");
         foreach ($posts as $post) {
             $post->numLikes = $this->numLikes($post->id);
@@ -185,5 +185,48 @@ class OrmRedSocial
         $bd = Klasto::getInstance();
         $sql = "SELECT COUNT(*) FROM post JOIN sigue WHERE sigue.usuario_login_seguidor = ?";
         return $bd->queryOne($sql, [$usuario])["COUNT(*)"];
+    }
+
+    function borrarPost($postId)
+    {
+        $bd = Klasto::getInstance();
+        $bd->startTransaction();
+        $sql = "DELETE FROM comenta WHERE post_id = ?";
+        $bd->execute($sql, [$postId]);
+        $sql = "DELETE FROM `like` WHERE post_id = ?";
+        $bd->execute($sql, [$postId]);
+        $sql = "DELETE FROM post WHERE id = ?";
+        $bd->execute($sql, [$postId]);
+        $bd->commit();
+    }
+
+    function borrarUsuario($usuario)
+    {
+        $bd = Klasto::getInstance();
+        $bd->startTransaction();
+        $sql = "DELETE FROM comenta WHERE usuario_login = ?";
+        $bd->execute($sql, [$usuario]);
+        $sql = "DELETE FROM `like` WHERE usuario_login = ?";
+        $bd->execute($sql, [$usuario]);
+        $posts = $this->obtenerPostUsuario($usuario);
+        foreach ($posts as $post) {
+            $sql = "DELETE FROM comenta WHERE post_id = ?";
+            $bd->execute($sql, [$post->id]);
+            $sql = "DELETE FROM `like` WHERE post_id = ?";
+            $bd->execute($sql, [$post->id]);
+        }
+        $sql = "DELETE FROM post WHERE usuario_login = ?";
+        $bd->execute($sql, [$usuario]);
+        $sql = "DELETE FROM sigue WHERE usuario_login_seguido = ? OR usuario_login_seguidor = ?";
+        $bd->execute($sql, [$usuario, $usuario]);
+        $sql = "DELETE FROM usuario WHERE `login` = ?";
+        $bd->execute($sql, [$usuario]);
+        $bd->commit();
+    }
+
+    function obtenerFotos($usuario) {
+        $bd = Klasto::getInstance();
+        $sql = "SELECT foto FROM post WHERE usuario_login = ?";
+        return $bd->query($sql, [$usuario]);
     }
 }
