@@ -33,25 +33,27 @@ Ti::extend("view/MainView.phtml"); ?>
         <div>Siguiendo: <?= $siguiendo ?>. Seguidores: <?= $seguidores ?>.</div>
     </div>
 </div>
-<div class="row col-md-6">
-    <form action="<?= $URL_PATH ?>/post/<?= $post->id ?>/comentario" method="POST">
-        <div class="form-group">
-            <h2>Comentarios</h2>
-            <textarea class="form-control" id="comentario" name="comentario" rows="2"></textarea>
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Enviar</button>
-        </div>
-    </form>
-</div>
+<?php if (isset($_SESSION["login"])) : ?>
+    <div class="row col-md-6">
+        <form action="<?= $URL_PATH ?>/post/<?= $post->id ?>/comentario" method="POST">
+            <div class="form-group">
+                <h2>Comentarios</h2>
+                <textarea class="form-control" id="comentario" name="comentario" rows="2"></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+        </form>
+    </div>
+<?php endif ?>
 <?php if (isset($comentarios)) : ?>
-    <div class="row">
+    <div class="row mt-3">
         <?php foreach ($comentarios as $comentario) : ?>
             <div class="col-md-8">
                 <?= $comentario->texto ?>
             </div>
             <div class="col-md-2">
-            <a href="<?= $URL_PATH ?>/perfil/<?= $comentario->usuario_login ?>"><?= $comentario->usuario_login ?></a> a <?= $comentario->fecha ?>
+                <a href="<?= $URL_PATH ?>/perfil/<?= $comentario->usuario_login ?>"><?= $comentario->usuario_login ?></a> a <?= $comentario->fecha ?>
             </div>
         <?php endforeach ?>
     </div>
