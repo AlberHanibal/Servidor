@@ -37,3 +37,26 @@ function confirmarBorrarUsuario(login) {
         location.href=URL_PATH + "/borrarUsuario/" + login;
     }
 }
+
+function existeLogin() {
+    let login = document.getElementById("login");
+    fetch(URL_PATH + "/api/existeLogin/" + login.value)
+        .then((res) => res.json())
+        .then((res) => {
+            let inputLogin = document.getElementById("login");
+            let errorLogin = document.getElementById("errorLogin");
+            if (inputLogin.hasAttribute("class", "is-invalid")) {
+                inputLogin.classList.remove("is-invalid");
+                errorLogin.textContent = "";
+            }
+            if (inputLogin.hasAttribute("class", "is-valid")) {
+                inputLogin.classList.remove("is-valid");
+            }
+            if (res.estado) {
+                errorLogin.textContent = "Login duplicado";
+                inputLogin.classList.add("is-invalid");
+            } else {
+                inputLogin.classList.add("is-valid");
+            }
+        })
+}

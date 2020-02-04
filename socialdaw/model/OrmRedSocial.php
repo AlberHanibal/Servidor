@@ -229,4 +229,10 @@ class OrmRedSocial
         $sql = "SELECT foto FROM post WHERE usuario_login = ?";
         return $bd->query($sql, [$usuario]);
     }
+
+    function existeLogin($usuario) {
+        $bd = Klasto::getInstance();
+        $sql = "SELECT COUNT(*) FROM usuario WHERE login = ?";
+        return $bd->queryOne($sql, [$usuario])["COUNT(*)"] == 1;
+    }
 }

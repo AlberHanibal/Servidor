@@ -71,6 +71,8 @@ Macaw::get($URL_PATH . '/perfil/(:any)', "controller\RedSocialController@perfil"
 
 Macaw::get($URL_PATH . '/api/like/(:num)', "controller\ApiController@likeClicked");
 
+Macaw::get($URL_PATH . '/api/existeLogin/(:any)', "controller\ApiController@existeLogin");
+
 Macaw::get($URL_PATH . '/borrarPost/(:any)', "controller\AdminController@borrarPost");
 
 Macaw::get($URL_PATH . '/borrarUsuario/(:any)', "controller\AdminController@borrarUsuario");
