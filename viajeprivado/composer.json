@@ -1,0 +1,14 @@
+{
+    "name": "victor/prudawfony",
+    "type": "project",
+    "require": {
+        "noahbuscher/macaw": "dev-master",
+        "victorjfg/dawfony": "dev-master"
+    },
+    "authors": [
+        {
+            "name": "tu nombre"
+        }
+    ],
+    "minimum-stability": "dev"
+}
