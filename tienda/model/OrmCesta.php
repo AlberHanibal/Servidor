@@ -4,6 +4,6 @@ namespace model;
 
 use dawfony\Klasto;
 
-class OrmRedSocial
+class OrmCesta
 {
 }

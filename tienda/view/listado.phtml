@@ -1,0 +1,49 @@
+<?php
+
+use \dawfony\Ti;
+/* <img src="<?= $URL_PATH ?>/assets/photos/<?= $producto->foto ?>" class="card-img-top w-50" alt="<?= $producto->foto ?>">
+                    <div class="card-body">
+                        <h5 class="card-title"><?= $producto->nombre ?></h5>
+                        <p class="card-text"><?= $producto->descripcion ?></p>
+                    </div> */
+
+global $URL_PATH;
+Ti::extend("view/main.phtml"); ?>
+<?php Ti::startBlock("extrahead"); ?>
+<style>
+    #contenedorCarrito {
+        position:fixed;
+        top:5%;
+        right:4%;
+        z-index:1
+    }
+</style>
+<?php Ti::endBlock(); ?>
+
+<?php Ti::startBlock("content"); ?>
+<div class="row row-cols-1 row-cols-md-4">
+    <?php foreach ($productos as $producto) : ?>
+        <div class="card col-4">
+            <img src="<?= $URL_PATH ?>/assets/photos/<?= $producto->foto ?>" class="card-img-top img-fluid" alt="<?= $producto->foto ?>">
+            <div class="card-body">
+                <h5 class="card-title text-uppercase font-italic font-weight-bold"><?= $producto->nombre ?></h5>
+                <p class="card-text"><?= $producto->descripcion ?></p>
+            </div>
+            <div class="card-footer bg-transparent border-success">
+                <button type="button" class="btn btn-outline-success">Comprar</button>
+            </div>
+        </div>
+    <?php endforeach ?>
+</div>
+
+<div class="text-center" id="contenedorCarrito">
+    <a href="#" class="text-danger" style="font-size: 35px">
+        <i class="fa fa-shopping-cart"></i><span id="numArticulos"></span>
+    </a>
+    <div class="d-none">
+
+    </div>
+</div>
+
+<?php Ti::endBlock(); ?>
+<?php Ti::endExtend() ?>
