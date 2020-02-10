@@ -1,11 +1,6 @@
 <?php
 
 use \dawfony\Ti;
-/* <img src="<?= $URL_PATH ?>/assets/photos/<?= $producto->foto ?>" class="card-img-top w-50" alt="<?= $producto->foto ?>">
-                    <div class="card-body">
-                        <h5 class="card-title"><?= $producto->nombre ?></h5>
-                        <p class="card-text"><?= $producto->descripcion ?></p>
-                    </div> */
 
 global $URL_PATH;
 Ti::extend("view/main.phtml"); ?>
@@ -30,7 +25,7 @@ Ti::extend("view/main.phtml"); ?>
                 <p class="card-text"><?= $producto->descripcion ?></p>
             </div>
             <div class="card-footer bg-transparent border-success">
-                <button type="button" class="btn btn-outline-success">Comprar</button>
+                <button type="button" class="btn btn-outline-success">Comprar <?=$producto->precio?>€</button>
             </div>
         </div>
     <?php endforeach ?>
