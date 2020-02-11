@@ -3,7 +3,7 @@
 namespace controller;
 
 use model\OrmProducto;
-use model\Producto;
+use model\OrmCesta;
 use dawfony\Ti;
 
 class ProductoController extends Controller
@@ -11,6 +11,8 @@ class ProductoController extends Controller
     function listado() {
         $title = "Productos";
         $productos = (new OrmProducto)->obtenerProductos();
-        echo Ti::render("view/listado.phtml", compact('productos', 'title'));
+        $cesta = (new OrmCesta)->obtenerCesta($_COOKIE["PHPSESSID"]);
+        $numProductos = count($cesta);
+        echo Ti::render("view/listado.phtml", compact('productos', 'cesta', 'numProductos', 'title'));
     }
 }

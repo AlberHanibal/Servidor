@@ -13,6 +13,7 @@ Ti::extend("view/main.phtml"); ?>
         z-index: 1
     }
 </style>
+<script src="<?= $URL_PATH ?>/js/comprar.js"></script>
 <?php Ti::endBlock(); ?>
 
 <?php Ti::startBlock("content"); ?>
@@ -25,7 +26,7 @@ Ti::extend("view/main.phtml"); ?>
                 <p class="card-text"><?= $producto->descripcion ?></p>
             </div>
             <div class="card-footer bg-transparent border-success">
-                <button type="button" class="btn btn-outline-success">Comprar <?=$producto->precio?>€</button>
+                <a href="javascript:void(0)" onclick="comprar(<?= $producto->id_producto ?>)" class="btn btn-outline-success">Comprar <?= $producto->precio ?>€</a>
             </div>
         </div>
     <?php endforeach ?>
@@ -33,7 +34,7 @@ Ti::extend("view/main.phtml"); ?>
 
 <div class="text-center" id="contenedorCarrito">
     <a href="#" class="text-danger" style="font-size: 35px">
-        <i class="fa fa-shopping-cart"></i><span id="numArticulos"></span>
+        <i class="fa fa-shopping-cart"></i><span id="numArticulos"> <?= $numProductos ?></span>
     </a>
     <div class="d-none">
 
