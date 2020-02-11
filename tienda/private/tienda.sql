@@ -34,7 +34,7 @@ CREATE TABLE `cesta` (
   `cantidad` int(11) DEFAULT NULL,
   `id_cesta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+ALTER TABLE `cesta` CHANGE `id_cesta` `id_cesta` INT(11) NOT NULL AUTO_INCREMENT;
 -- --------------------------------------------------------
 
 --

@@ -3,16 +3,16 @@
 namespace controller;
 
 use model\OrmCesta;
+use model\OrmProducto;
 
 class ApiController extends Controller
 {
     function annadirProducto($id_producto) {
         header('Content-type: application/json');
         // prodria enviarle un objeto cesta cuando meta cantidad
-        (new OrmCesta)->annadirProducto($_COOKIE["PHPSESSID"], $id_producto);
-        $cesta = (new OrmCesta)->obtenerCesta($_COOKIE["PHPSESSID"]);
-        $data["cesta"] = $cesta;
-        $data["numArticulos"] = count($cesta);
+        (new OrmCesta)->annadirProducto(session_id(), $id_producto);
+        $data["productoAnnadido"] = (new OrmProducto)->obtenerProducto($id_producto);
+        $data["numArticulos"] = (new OrmCesta)->numProductosCesta(session_id());
         echo json_encode($data);
     }
 }

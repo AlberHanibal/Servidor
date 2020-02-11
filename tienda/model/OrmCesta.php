@@ -18,4 +18,10 @@ class OrmCesta
         $sql = "SELECT id_visitante, cesta.id_producto, cantidad, nombre, descripcion, foto, precio FROM cesta JOIN producto ON cesta.id_producto = producto.id_producto WHERE id_visitante = ?";
         return $bd->query($sql, [$id_visitante], "model\Cesta");
     }
+
+    function numProductosCesta($id_visitante) {
+        $bd = Klasto::getInstance();
+        $sql = "SELECT COUNT(*) FROM cesta WHERE id_visitante = ?";
+        return $bd->queryOne($sql, [$id_visitante])["COUNT(*)"];
+    }
 }
