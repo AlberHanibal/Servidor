@@ -1,3 +1,12 @@
+$('document').ready(function() {
+    $('#contenedorProductos').hide();
+})
+
 function mostrarCarro() {
-    $('#contenedorProductos').toggleClass("d-none");
+    if ($('#contenedorProductos').is(":hidden")) {
+        $('#contenedorProductos').show("slow");
+    } else {
+        $('#contenedorProductos').hide("slow");
+    }
+    
 }

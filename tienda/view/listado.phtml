@@ -39,7 +39,7 @@ Ti::extend("view/main.phtml"); ?>
             <i class="fa fa-shopping-cart"></i><span id="numArticulos"> <?= $numProductos ?></span>
         </a>
     </div>
-    <div id="contenedorProductos" class="d-none">
+    <div id="contenedorProductos">
         <?php foreach ($cesta as $producto) : ?>
             <div>
                 <?= $producto->nombre ?> - <?= $producto->precio ?>€
