@@ -8,5 +8,9 @@ use dawfony\Ti;
 
 class CestaController extends Controller
 {
-    
+    function pedido() {
+        $title = "Pedido";
+        $cesta = (new OrmCesta)->obtenerCesta(session_id());
+        
+    }
 }

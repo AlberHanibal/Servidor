@@ -9,8 +9,13 @@ class OrmCesta
 {
     function annadirProducto($id_visitante, $id_producto, $cantidad = 1) {
         $bd = Klasto::getInstance();
-        $sql = "INSERT INTO cesta (id_visitante, id_producto, cantidad) VALUES (?, ?, ?)";
-        return $bd->execute($sql, [$id_visitante, $id_producto, $cantidad]);
+        $sql = "UPDATE cesta SET cantidad = cantidad + ? WHERE id_visitante = ? AND id_producto = ?";
+        $lineasActualizadas = $bd->execute($sql, [$cantidad, $id_visitante, $id_producto]);
+        if ($lineasActualizadas == 0) {
+            $sql = "INSERT INTO cesta (id_visitante, id_producto, cantidad) VALUES (?, ?, ?)";
+            return $bd->execute($sql, [$id_visitante, $id_producto, $cantidad]);
+        }
+        return $lineasActualizadas;
     }
 
     function obtenerCesta($id_visitante) {
@@ -21,7 +26,7 @@ class OrmCesta
 
     function numProductosCesta($id_visitante) {
         $bd = Klasto::getInstance();
-        $sql = "SELECT COUNT(*) FROM cesta WHERE id_visitante = ?";
-        return $bd->queryOne($sql, [$id_visitante])["COUNT(*)"];
+        $sql = "SELECT SUM(cantidad) FROM cesta WHERE id_visitante = ?";
+        return $bd->queryOne($sql, [$id_visitante])["SUM(cantidad)"];
     }
 }

@@ -7,11 +7,11 @@ use model\OrmProducto;
 
 class ApiController extends Controller
 {
-    function annadirProducto($id_producto) {
+    function annadirProducto($id_producto, $cantidad) {
         header('Content-type: application/json');
         // prodria enviarle un objeto cesta cuando meta cantidad
-        (new OrmCesta)->annadirProducto(session_id(), $id_producto);
-        $data["productoAnnadido"] = (new OrmProducto)->obtenerProducto($id_producto);
+        $bd = (new OrmCesta)->annadirProducto(session_id(), $id_producto, $cantidad);
+        $data["cesta"] = (new OrmCesta)->obtenerCesta(session_id());
         $data["numArticulos"] = (new OrmCesta)->numProductosCesta(session_id());
         echo json_encode($data);
     }

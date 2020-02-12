@@ -28,6 +28,7 @@ Ti::extend("view/main.phtml"); ?>
             </div>
             <div class="card-footer bg-transparent border-success">
                 <a href="javascript:void(0)" onclick="comprar(<?= $producto->id_producto ?>)" class="btn btn-outline-success">Comprar <?= $producto->precio ?>€</a>
+                <input type="number" id="<?= $producto->id_producto ?>" min="1" value="1">
             </div>
         </div>
     <?php endforeach ?>
@@ -42,10 +43,10 @@ Ti::extend("view/main.phtml"); ?>
     <div id="contenedorProductos">
         <?php foreach ($cesta as $producto) : ?>
             <div>
-                <?= $producto->nombre ?> - <?= $producto->precio ?>€
+                (x<?= $producto->cantidad ?>)<?= $producto->nombre ?> - <?= $producto->precio ?>€
             </div>
         <?php endforeach ?>
-        <a href="#" class="btn btn-success">Tramitar Pedido</a>
+        <a href="<?= $URL_PATH ?>/tramitarPedido" class="btn btn-success">Tramitar Pedido</a>
     </div>
 </div>
 
