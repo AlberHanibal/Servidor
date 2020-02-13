@@ -5,7 +5,7 @@ use \dawfony\Ti;
 global $URL_PATH;
 Ti::extend("view/main.phtml"); ?>
 <?php Ti::startBlock("extrahead"); ?>
-<script src="<?= $URL_PATH ?>/js/modificarCantidad.js"></script>
+<script src="<?= $URL_PATH ?>/js/carro.js"></script>
 
 <?php Ti::endBlock(); ?>
 
@@ -19,12 +19,13 @@ Ti::extend("view/main.phtml"); ?>
                 <th scope="col">Cantidad</th>
                 <th scope="col">Precio unitario</th>
                 <th scope="col">Precio total</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody id="tablaProductos">
             <?php foreach ($cesta as $producto) : ?>
-                <tr>
-                    <td class="w-25"><img src="<?= $URL_PATH ?>/assets/photos/<?= $producto->foto ?>" class="img-fluid" alt="<?= $producto->foto ?>"></td>
+                <tr id="<?= $producto->id_producto ?>">
+                    <td class="w-25"><img src="<?= $URL_PATH ?>/assets/photos/<?= $producto->foto ?>" class="img-fluid w-25" alt="<?= $producto->foto ?>"></td>
                     <td><?= $producto->nombre ?></td>
                     <td>
                         <button type="button" id="+<?= $producto->id_producto ?>" class="btn btn-outline-primary" onclick="modificarCantidad(<?= $producto->id_producto ?>, '+')"><i class="fa fa-plus"></i></button>
@@ -32,11 +33,13 @@ Ti::extend("view/main.phtml"); ?>
                         <button type="button" id="-<?= $producto->id_producto ?>" class="btn btn-outline-primary" onclick="modificarCantidad(<?= $producto->id_producto ?>, '-')"><i class="fa fa-minus"></i></button>
                     </td>
                     <td><?= $producto->precio ?>€</td>
-                    <td><?= $producto->cantidad * $producto->precio ?>€</td>
+                    <td id="precioTotal<?= $producto->id_producto ?>"><?= $producto->cantidad * $producto->precio ?>€</td>
+                    <td><a href="javascript:void(0)" onclick="borrarProducto('<?= $producto->id_producto ?>')"><i class="fa fa-trash text-danger"></i></a></td>
                 </tr>
             <?php endforeach ?>
         </tbody>
     </table>
 </div>
+<div>Total: <span id="pedidoTotal"><?= $pedidoTotal ?></span>€</div>
 <?php Ti::endBlock(); ?>
 <?php Ti::endExtend() ?>
