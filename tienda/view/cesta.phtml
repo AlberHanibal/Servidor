@@ -40,6 +40,14 @@ Ti::extend("view/main.phtml"); ?>
         </tbody>
     </table>
 </div>
-<div>Total: <span id="pedidoTotal"><?= $pedidoTotal ?></span>€</div>
+<div class="row float-right">
+    <div class="col-3 p-2">
+        <a href="<?= $URL_PATH ?>/tramitarPedido" class="btn btn-success">Pagar</a>
+    </div>
+    <div class="col-7 ml-4 alert alert-success">
+        Total: <span id="pedidoTotal" class="font-weight-bold"><?= $pedidoTotal ?></span>€
+    </div>
+
+</div>
 <?php Ti::endBlock(); ?>
 <?php Ti::endExtend() ?>

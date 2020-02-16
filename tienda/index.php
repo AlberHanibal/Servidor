@@ -14,4 +14,6 @@ Macaw::get($URL_PATH . '/api/modificarCantidad/(:num)/(:any)', "controller\ApiCo
 
 Macaw::get($URL_PATH . '/pedido', "controller\CestaController@pedido");
 
+Macaw::get($URL_PATH . '/tramitarPedido', "controller\PedidoController@tramitarPedido");
+
 Macaw::dispatch();
