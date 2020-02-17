@@ -4,6 +4,7 @@ namespace controller;
 
 use model\OrmCesta;
 use model\OrmUsuario;
+use dawfony\Ti;
 
 class ApiController extends Controller
 {
@@ -39,18 +40,6 @@ class ApiController extends Controller
         echo json_encode($data);
     }
 
-    // con get
-    /* function comprobarUsuario($login, $password) {
-        
-        header('Content-type: application/json');
-        $usuario = (new OrmUsuario)->obtenerUsuario($login);
-        if ($usuario != false) {
-            $data["usuarioCorrecto"] = password_verify($password, $usuario->contrasena);
-        } else {
-            $data["usuarioCorrecto"] = false;
-        }
-        echo json_encode($data);
-    } */
     function comprobarUsuario()
     {
         header('Content-type: application/json');
@@ -63,6 +52,16 @@ class ApiController extends Controller
             $data["usuarioCorrecto"] = false;
         }
         echo json_encode($data);
+    }
 
+    function procesarPedido() {
+        header('Content-type: application/json');
+        $json = file_get_contents('php://input');
+        $dataRecibida = json_decode($json);
+        if (isset($dataRecibida->usuario)) {
+            echo json_encode($dataRecibida);    
+        } else {
+            echo json_encode($dataRecibida->nombre);    
+        }
     }
 }

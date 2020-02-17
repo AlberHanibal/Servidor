@@ -14,6 +14,7 @@ Macaw::get($URL_PATH . '/api/modificarCantidad/(:num)/(:any)', "controller\ApiCo
 Macaw::get($URL_PATH . '/api/comprobarEmail/(:any)', "controller\ApiController@comprobarEmail");
 Macaw::post($URL_PATH . '/api/comprobarUsuario', "controller\ApiController@comprobarUsuario");
 Macaw::get($URL_PATH . '/api/comprobarUsuario/(:any)/(:any)', "controller\ApiController@comprobarUsuario");
+Macaw::post($URL_PATH . '/api/procesarPedido', "controller\ApiController@procesarPedido");
 
 Macaw::get($URL_PATH . '/pedido', "controller\CestaController@pedido");
 
