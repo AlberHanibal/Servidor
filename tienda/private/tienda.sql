@@ -45,7 +45,7 @@ CREATE TABLE `pedido` (
   `id_pedido` int(11) NOT NULL,
   `id_usuario` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+ALTER TABLE `pedido` ADD `estado` VARCHAR(20) NOT NULL AFTER `id_usuario`; 
 -- --------------------------------------------------------
 
 --

@@ -1,5 +1,5 @@
 # CAMINO
-**MODIFICAR BD pedido** 
+
 ## ApiController guardar usuario en BD, coger cesta, generar pedido
 
 
