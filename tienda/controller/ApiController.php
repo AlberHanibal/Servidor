@@ -80,6 +80,6 @@ class ApiController extends Controller
         $pedido = new Pedido();
         $pedido->id_usuario = $login;
         $pedido->estado = 0;
-        (new OrmPedido)->nuevoPedido($pedido);
+        // (new OrmPedido)->nuevoPedido($pedido);
     }
 }

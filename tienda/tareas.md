@@ -1,6 +1,8 @@
 # CAMINO
 
-## ApiController guardar usuario en BD, coger cesta, generar pedido
+## BD rellenar producto-pedido
+## hacer vista para "url_pingback_informa", actualizar en BD el pedido, borrar cesta si es ok
+## hacer vista para "url_retorno" e informar al usuario
 
 
 

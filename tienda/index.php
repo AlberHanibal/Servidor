@@ -19,5 +19,8 @@ Macaw::post($URL_PATH . '/api/procesarPedido', "controller\ApiController@procesa
 Macaw::get($URL_PATH . '/pedido', "controller\CestaController@pedido");
 
 Macaw::get($URL_PATH . '/tramitarPedido', "controller\PedidoController@tramitarPedido");
+Macaw::get($URL_PATH . '/informePasarela', "controller\PedidoController@informePasarela");
+Macaw::get($URL_PATH . '/retornoPasarela', "controller\PedidoController@retornoPasarela");
+
 
 Macaw::dispatch();

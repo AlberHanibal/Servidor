@@ -54,11 +54,11 @@ function procesarPedido() {
             .then((res) => res.json())
             .then((res) => {
                 console.log(res);
-                /* if (true) {
-                    location.href = URL_PATH + "/LOQUESEA";
+                if (true) {
+                    location.href = "/Servidor/pasarela-simulacion?cod_comercio=7777&cod_pedido=4&importe=51&concepto=pagoPedido";
                 } else {
                     // exception 500
-                } */
+                }
 
             });
     }
