@@ -3,8 +3,12 @@
 namespace controller;
 
 use model\OrmCesta;
+use model\Usuario;
+use model\Pedido;
 use model\OrmUsuario;
-use dawfony\Ti;
+use model\OrmPedido;
+
+require "funciones.php";
 
 class ApiController extends Controller
 {
@@ -54,14 +58,28 @@ class ApiController extends Controller
         echo json_encode($data);
     }
 
-    function procesarPedido() {
+    function procesarPedido()
+    {
         header('Content-type: application/json');
         $json = file_get_contents('php://input');
         $dataRecibida = json_decode($json);
+        $login = "";
         if (isset($dataRecibida->usuario)) {
-            echo json_encode($dataRecibida);    
+            $login = $dataRecibida->usuario;
+            echo json_encode($dataRecibida);
         } else {
-            echo json_encode($dataRecibida->nombre);    
+            $usuario = new Usuario();
+            $usuario->login = sanitizar($dataRecibida->login);
+            $usuario->contrasena = password_hash($dataRecibida->contrasena, PASSWORD_DEFAULT);
+            $usuario->nombre = sanitizar($dataRecibida->nombre);
+            $usuario->direccion = sanitizar($dataRecibida->direccion);
+            (new OrmUsuario)->annadirUsuario($usuario);
+            $login = $usuario->login;
+            echo json_encode($dataRecibida->nombre);
         }
+        $pedido = new Pedido();
+        $pedido->id_usuario = $login;
+        $pedido->estado = 0;
+        (new OrmPedido)->nuevoPedido($pedido);
     }
 }

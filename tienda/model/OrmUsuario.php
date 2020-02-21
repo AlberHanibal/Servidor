@@ -17,5 +17,11 @@ class OrmUsuario
         $sql = "SELECT login, nombre, contrasena, direccion FROM usuario WHERE login = ?";
         return $bd->queryOne($sql, [$login], "model\Usuario");
     }
+
+    function annadirUsuario($usuario) {
+        $bd = Klasto::getInstance();
+        $sql = "INSERT INTO usuario (login, nombre, contrasena, direccion) VALUES (?, ?, ?, ?)";
+        return $bd->execute($sql, [$usuario->login, $usuario->nombre, $usuario->contrasena, $usuario->direccion]);
+    }
 }
 
