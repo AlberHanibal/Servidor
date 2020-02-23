@@ -9,8 +9,8 @@ function comprar(id_producto) {
             for (const producto of res.cesta) {
                 $('#contenedorProductos').prepend("<div>(x" + producto.cantidad + ")" + producto.nombre + " - " + producto.precio + "€</div >");
             }
-            
+
             $('#contenedorProductos').show("fast").delay(5000).hide("slow");
-            
+
         })
 }

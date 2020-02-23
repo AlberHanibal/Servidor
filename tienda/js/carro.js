@@ -1,4 +1,4 @@
-$('document').ready(function() {
+$('document').ready(function () {
     $('#contenedorProductos').hide();
 })
 
@@ -14,7 +14,7 @@ function borrarProducto(id_producto) {
     fetch(URL_PATH + "/api/borrarProducto/" + id_producto)
         .then((res) => res.json())
         .then((res) => {
-            $('#'+ id_producto).remove();
+            $('#' + id_producto).remove();
             pedidoTotal = $('#pedidoTotal').text();
             pedidoTotal = pedidoTotal - (res.producto[0].cantidad * res.producto[0].precio);
             $('#pedidoTotal').text(pedidoTotal);
@@ -31,7 +31,7 @@ function modificarCantidad(id_producto, mod) {
             pedidoTotal = $('#pedidoTotal').text();
             if (mod == "+") {
                 pedidoTotal = parseInt(pedidoTotal) + producto.precio;
-            } else if(mod == "-") {
+            } else if (mod == "-") {
                 pedidoTotal = pedidoTotal - producto.precio;
             }
             $('#pedidoTotal').text(pedidoTotal);

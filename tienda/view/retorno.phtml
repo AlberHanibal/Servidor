@@ -9,6 +9,11 @@ Ti::extend("view/main.phtml"); ?>
 <?php Ti::endBlock(); ?>
 
 <?php Ti::startBlock("content"); ?>
-
+<div class="jumbotron bg-light">
+    <h1 class="display-4"><?= $h1 ?></h1>
+    <hr class="my-4">
+    <p><?= $mensaje ?></p>
+    <a class="btn btn-primary btn-lg" href="<?= $URL_PATH ?>/" role="button">Volver a la tienda</a>
+</div>
 <?php Ti::endBlock(); ?>
 <?php Ti::endExtend() ?>

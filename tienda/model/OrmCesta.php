@@ -59,4 +59,11 @@ class OrmCesta
         $sql = "SELECT id_visitante, cesta.id_producto, cantidad, nombre, descripcion, foto, precio FROM cesta JOIN producto ON cesta.id_producto = producto.id_producto WHERE id_visitante = ? AND cesta.id_producto = ?";
         return $bd->query($sql, [$id_visitante, $id_producto], "model\Cesta");
     }
+
+    function borrarCestaUsuario($id_visitante)
+    {
+        $bd = Klasto::getInstance();
+        $sql = "DELETE FROM cesta WHERE id_visitante = ?";
+        return $bd->execute($sql, [$id_visitante]);
+    }
 }

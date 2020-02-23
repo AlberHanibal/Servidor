@@ -66,7 +66,6 @@ class ApiController extends Controller
         $login = "";
         if (isset($dataRecibida->usuario)) {
             $login = $dataRecibida->usuario;
-            echo json_encode($dataRecibida);
         } else {
             $usuario = new Usuario();
             $usuario->login = sanitizar($dataRecibida->login);
@@ -75,11 +74,19 @@ class ApiController extends Controller
             $usuario->direccion = sanitizar($dataRecibida->direccion);
             (new OrmUsuario)->annadirUsuario($usuario);
             $login = $usuario->login;
-            echo json_encode($dataRecibida->nombre);
         }
         $pedido = new Pedido();
         $pedido->id_usuario = $login;
         $pedido->estado = 0;
-        // (new OrmPedido)->nuevoPedido($pedido);
+        (new OrmPedido)->nuevoPedido($pedido);
+        $cesta = (new OrmCesta)->obtenerCesta(session_id());
+        (new OrmPedido)->completarPedido($pedido->id_pedido, $cesta);
+        $importe = 0;
+        foreach ($cesta as $producto) {
+            $importe = $importe + ($producto->cantidad * $producto->precio);
+        }
+        $data["importe"] = $importe;
+        $data["cod_pedido"] = $pedido->id_pedido;
+        echo json_encode($data);
     }
 }
