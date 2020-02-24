@@ -49,8 +49,11 @@ Ti::extend("view/main.phtml"); ?>
     <div id="contenedorProductos">
         <a href="<?= $URL_PATH ?>/pedido" class="btn btn-success">Tramitar Pedido</a>
         <?php foreach ($cesta as $producto) : ?>
-            <div>
-                (x<?= $producto->cantidad ?>)<?= $producto->nombre ?> - <?= $producto->precio ?>€
+            <div class="mt-1">
+                <img src="<?= $URL_PATH ?>/assets/photos/<?= $producto->foto ?>" class="imagen-cesta w-25" alt="<?= $producto->foto ?>">
+                <div class="info">
+                    (x<?= $producto->cantidad ?>)<?= $producto->nombre ?> - <?= $producto->precio ?>€
+                </div>
             </div>
         <?php endforeach ?>
     </div>
