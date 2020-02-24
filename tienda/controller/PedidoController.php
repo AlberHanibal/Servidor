@@ -11,8 +11,13 @@ class PedidoController extends Controller
 {
     function tramitarPedido()
     {
+        $cesta = (new OrmCesta)->obtenerCesta(session_id());
+        $pedidoTotal = 0;
+        foreach ($cesta as $producto) {
+            $pedidoTotal = $pedidoTotal + ($producto->cantidad * $producto->precio);
+        }
         $title = "Tramitar Pedido";
-        echo Ti::render("view/pedido.phtml", compact('title'));
+        echo Ti::render("view/pedido.phtml", compact('title', 'cesta', 'pedidoTotal'));
     }
 
     function informePasarela()

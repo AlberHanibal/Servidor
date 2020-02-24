@@ -8,9 +8,15 @@ Ti::extend("view/main.phtml"); ?>
 <style>
     #contenedorCarrito {
         position: fixed;
-        top: 5%;
-        right: 4%;
-        z-index: 1
+        top: 0%;
+        right: 0%;
+        z-index: 1;
+        height: 100%;
+        width: 10%;
+    }
+
+    #contenedorProductos {
+        display: none;
     }
 </style>
 <script src="<?= $URL_PATH ?>/js/comprar.js"></script>
@@ -34,19 +40,19 @@ Ti::extend("view/main.phtml"); ?>
     <?php endforeach ?>
 </div>
 
-<div class="text-center" id="contenedorCarrito">
+<div class="text-center bg-info text-light" id="contenedorCarrito">
     <div id="carro">
         <a href="javascript:void(0)" onclick="mostrarCarro()" class="text-danger" style="font-size: 35px">
             <i class="fa fa-shopping-cart"></i><span id="numArticulos"> <?= $numProductos ?></span>
         </a>
     </div>
     <div id="contenedorProductos">
+        <a href="<?= $URL_PATH ?>/pedido" class="btn btn-success">Tramitar Pedido</a>
         <?php foreach ($cesta as $producto) : ?>
             <div>
                 (x<?= $producto->cantidad ?>)<?= $producto->nombre ?> - <?= $producto->precio ?>€
             </div>
         <?php endforeach ?>
-        <a href="<?= $URL_PATH ?>/pedido" class="btn btn-success">Tramitar Pedido</a>
     </div>
 </div>
 

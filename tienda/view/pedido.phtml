@@ -74,9 +74,36 @@ Ti::extend("view/main.phtml"); ?>
     </div>
 </div>
 <!-- mostrar cesta -->
-
-<div class="form-group row">
-    <button class="btn btn-success" onclick="procesarPedido()">PAGAR</button>
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Producto</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Precio unitario</th>
+                <th scope="col">Precio total</th>
+            </tr>
+        </thead>
+        <tbody id="tablaProductos">
+            <?php foreach ($cesta as $producto) : ?>
+                <tr id="<?= $producto->id_producto ?>">
+                    <td class="w-25"><img src="<?= $URL_PATH ?>/assets/photos/<?= $producto->foto ?>" class="img-fluid w-25" alt="<?= $producto->foto ?>"></td>
+                    <td><?= $producto->nombre ?></td>
+                    <td><span id="cantidad<?= $producto->id_producto ?>"><?= $producto->cantidad ?></span></td>
+                    <td><?= $producto->precio ?>€</td>
+                    <td id="precioTotal<?= $producto->id_producto ?>"><?= $producto->cantidad * $producto->precio ?>€</td>
+                </tr>
+            <?php endforeach ?>
+        </tbody>
+    </table>
 </div>
+<div class="container">
+    <div class="alert alert-success">
+        Total: <span id="pedidoTotal" class="font-weight-bold"><?= $pedidoTotal ?></span>€
+    </div>
+    <button class="btn btn-success" onclick="procesarPedido()">Pagar</button>
+</div>
+
 <?php Ti::endBlock(); ?>
 <?php Ti::endExtend() ?>
