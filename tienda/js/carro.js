@@ -1,8 +1,8 @@
-$(document).ready(function() {
+$(document).ready(function () {
     $('.info').hide();
-    $('#contenedorProductos div').hover(function() {
+    $('#contenedorProductos div').hover(function () {
         $('.info').show("slow");
-    }, function() {
+    }, function () {
         $('.info').hide("slow");
     });
 })

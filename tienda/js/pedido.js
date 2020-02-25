@@ -45,8 +45,6 @@ function procesarPedido() {
                     direccion: $('#direccion').val()
                 })
             }
-        } else {
-            // generar mensaje de error
         }
     }
     if (usuarioAutenticado || usuarioRegistro) {

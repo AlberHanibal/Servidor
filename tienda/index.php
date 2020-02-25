@@ -22,5 +22,4 @@ Macaw::get($URL_PATH . '/tramitarPedido', "controller\PedidoController@tramitarP
 Macaw::get($URL_PATH . '/informePasarela', "controller\PedidoController@informePasarela");
 Macaw::get($URL_PATH . '/retornoPasarela', "controller\PedidoController@retornoPasarela");
 
-
 Macaw::dispatch();

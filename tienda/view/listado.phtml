@@ -24,7 +24,7 @@ Ti::extend("view/main.phtml"); ?>
 <?php Ti::endBlock(); ?>
 
 <?php Ti::startBlock("content"); ?>
-<div class="row">
+<div class="row mr-5">
     <?php foreach ($productos as $producto) : ?>
         <div class="card col-md-3 pb-2 mt-3">
             <img src="<?= $URL_PATH ?>/assets/photos/<?= $producto->foto ?>" class="card-img-top img-fluid" alt="<?= $producto->foto ?>">

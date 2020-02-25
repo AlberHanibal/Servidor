@@ -3,7 +3,6 @@
 namespace model;
 
 use dawfony\Klasto;
-use model\OrmCesta;
 
 class OrmPedido
 {
