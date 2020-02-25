@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-02-2020 a las 17:21:57
+-- Tiempo de generación: 25-02-2020 a las 15:39:49
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -34,7 +34,7 @@ CREATE TABLE `cesta` (
   `cantidad` int(11) DEFAULT NULL,
   `id_cesta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-ALTER TABLE `cesta` CHANGE `id_cesta` `id_cesta` INT(11) NOT NULL AUTO_INCREMENT;
+
 -- --------------------------------------------------------
 
 --
@@ -43,9 +43,10 @@ ALTER TABLE `cesta` CHANGE `id_cesta` `id_cesta` INT(11) NOT NULL AUTO_INCREMENT
 
 CREATE TABLE `pedido` (
   `id_pedido` int(11) NOT NULL,
-  `id_usuario` varchar(45) NOT NULL
+  `id_usuario` varchar(45) NOT NULL,
+  `estado` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-ALTER TABLE `pedido` ADD `estado` VARCHAR(20) NOT NULL AFTER `id_usuario`; 
+
 -- --------------------------------------------------------
 
 --
@@ -139,10 +140,16 @@ ALTER TABLE `usuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `cesta`
+--
+ALTER TABLE `cesta`
+  MODIFY `id_cesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+
+--
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
